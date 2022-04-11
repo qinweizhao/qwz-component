@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @param <T> 　T对象
  * @author qinweizhao
  */
-public class Result<T> implements Serializable {
+public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,73 +30,73 @@ public class Result<T> implements Serializable {
 
     private T data;
 
-    private Result() {
+    private R() {
 
     }
 
-    private Result(IResultCode resultCode) {
+    private R(IResultCode resultCode) {
         restResult(resultCode.getCode(), null, resultCode.getMsg());
     }
 
-    private Result(IResultCode resultCode, T data) {
+    private R(IResultCode resultCode, T data) {
         restResult(resultCode.getCode(), data, resultCode.getMsg());
     }
 
 
-    public static <T> Result<T> success() {
-        return new Result<>();
+    public static <T> R<T> success() {
+        return new R<>();
     }
 
-    public static <T> Result<T> success(T data) {
+    public static <T> R<T> success(T data) {
         return restResult(SUCCESS, data, null);
     }
 
-    public static <T> Result<T> success(IResultCode resultCode) {
-        return new Result<>(resultCode, null);
+    public static <T> R<T> success(IResultCode resultCode) {
+        return new R<>(resultCode, null);
     }
 
-    public static <T> Result<T> success(IResultCode resultCode, T data) {
-        return new Result<>(resultCode, data);
+    public static <T> R<T> success(IResultCode resultCode, T data) {
+        return new R<>(resultCode, data);
     }
 
-    public static <T> Result<T> success(T data, String msg) {
+    public static <T> R<T> success(T data, String msg) {
         return restResult(SUCCESS, data, msg);
     }
 
 
-    public static <T> Result<T> failure() {
+    public static <T> R<T> failure() {
         return restResult(FAILURE, null, null);
     }
 
-    public static <T> Result<T> failure(IResultCode resultCode) {
-        return new Result<>(resultCode);
+    public static <T> R<T> failure(IResultCode resultCode) {
+        return new R<>(resultCode);
     }
 
-    public static <T> Result<T> failure(String msg) {
+    public static <T> R<T> failure(String msg) {
         return restResult(FAILURE, null, msg);
     }
 
-    public static <T> Result<T> failure(T data, String msg) {
+    public static <T> R<T> failure(T data, String msg) {
         return restResult(FAILURE, data, msg);
     }
 
 
-    public static <T> Result<T> condition(boolean flag) {
+    public static <T> R<T> condition(boolean flag) {
         return flag ? success() : failure();
     }
 
-    public static <T> Result<T> condition(int i) {
+    public static <T> R<T> condition(int i) {
         return i > 0 ? success() : failure();
     }
 
 
-    private static <T> Result<T> restResult(int code, T data, String msg) {
-        Result<T> result = new Result<>();
-        result.setCode(code);
-        result.setData(data);
-        result.setMsg(msg);
-        result.setTime(System.currentTimeMillis());
-        return result;
+    private static <T> R<T> restResult(int code, T data, String msg) {
+        R<T> r = new R<>();
+        r.setCode(code);
+        r.setData(data);
+        r.setMsg(msg);
+        r.setTime(System.currentTimeMillis());
+        return r;
     }
 
 
