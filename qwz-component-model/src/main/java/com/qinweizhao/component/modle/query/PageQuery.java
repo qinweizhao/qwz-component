@@ -1,4 +1,4 @@
-package com.qinweizhao.modle.query;
+package com.qinweizhao.component.modle.query;
 
 
 import javax.management.Query;

@@ -9,12 +9,27 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>qwz-component-model</artifactId>
+    <artifactId>qwz-component-all</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.qinweizhao.component</groupId>
+            <artifactId>qwz-component-exception</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qinweizhao.component</groupId>
+            <artifactId>qwz-component-model</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

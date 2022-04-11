@@ -1,4 +1,4 @@
-package com.qinweizhao.modle.result;
+package com.qinweizhao.component.modle.result;
 
 
 import java.io.Serializable;
