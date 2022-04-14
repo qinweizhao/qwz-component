@@ -8,17 +8,22 @@
     <artifactId>qwz-component</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <modules>
-        <module>qwz-component-model</module>
-        <module>qwz-component-exception</module>
-        <module>qwz-component-all</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
     </properties>
+
+
+    <modules>
+        <module>qwz-component-model</module>
+        <module>qwz-component-exception</module>
+        <module>qwz-component-redis-starter</module>
+        <module>qwz-component-all</module>
+    </modules>
+
 
     <build>
         <plugins>

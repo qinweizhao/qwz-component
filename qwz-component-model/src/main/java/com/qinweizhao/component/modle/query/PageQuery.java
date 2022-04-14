@@ -1,7 +1,6 @@
 package com.qinweizhao.component.modle.query;
 
 
-import javax.management.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  *
  * @author qinweizhao
  */
-public abstract class PageQuery extends Query {
+public abstract class PageQuery {
     private static final long serialVersionUID = 1L;
 
     public static final String ASC = "ASC";
