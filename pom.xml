@@ -20,6 +20,7 @@
     <modules>
         <module>qwz-component-model</module>
         <module>qwz-component-exception</module>
+        <module>qwz-component-exception-starter</module>
         <module>qwz-component-redis-starter</module>
         <module>qwz-component-all</module>
     </modules>
