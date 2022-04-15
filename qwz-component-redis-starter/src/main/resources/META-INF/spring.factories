@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.qinweizhao.starter.redis.QwzRedisAutoConfiguration
-  
+com.qinweizhao.component.redis.QwzRedisAutoConfiguration

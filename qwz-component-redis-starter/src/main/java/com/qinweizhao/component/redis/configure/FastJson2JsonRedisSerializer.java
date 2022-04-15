@@ -1,4 +1,4 @@
-package com.qinweizhao.starter.redis.configure;
+package com.qinweizhao.component.redis.configure;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
