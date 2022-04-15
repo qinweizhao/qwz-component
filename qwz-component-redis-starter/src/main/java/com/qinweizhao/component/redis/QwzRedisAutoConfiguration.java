@@ -28,7 +28,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class QwzRedisAutoConfiguration extends CachingConfigurerSupport {
 
     @Bean
-    @ConditionalOnMissingBean(RedisTemplate.class)
     @SuppressWarnings(value = {"unchecked", "rawtypes"})
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
