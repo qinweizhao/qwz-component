@@ -14,6 +14,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.5.8</spring-boot.version>
     </properties>
 
 
@@ -24,7 +25,22 @@
         <module>qwz-component-log-starter</module>
         <module>qwz-component-redis-starter</module>
         <module>qwz-component-all</module>
+        <module>qwz-component-util</module>
     </modules>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot 依赖配置 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
     <build>
