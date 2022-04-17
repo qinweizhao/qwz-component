@@ -35,11 +35,11 @@ public class R<T> implements Serializable {
     }
 
     private R(ResultCode resultCode) {
-        restResult(resultCode.getCode(), null, resultCode.getMsg());
+        restResult(resultCode.getCode(), null, resultCode.getMessage());
     }
 
     private R(ResultCode resultCode, T data) {
-        restResult(resultCode.getCode(), data, resultCode.getMsg());
+        restResult(resultCode.getCode(), data, resultCode.getMessage());
     }
 
 
