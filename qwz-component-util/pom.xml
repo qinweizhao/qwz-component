@@ -40,13 +40,6 @@
         </dependency>
 
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.2.9</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.qinweizhao.component</groupId>
             <artifactId>qwz-component-model</artifactId>
             <version>1.0.0</version>
