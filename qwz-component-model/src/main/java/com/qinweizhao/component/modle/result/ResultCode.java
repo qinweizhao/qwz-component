@@ -3,7 +3,7 @@ package com.qinweizhao.component.modle.result;
 /**
  * @author qinweizhao
  */
-public interface IResultCode {
+public interface ResultCode {
 
     /**
      * 获取业务码
@@ -17,6 +17,6 @@ public interface IResultCode {
      *
      * @return 返回结构体中的信息
      */
-    String getMsg();
+    String getMessage();
 
 }

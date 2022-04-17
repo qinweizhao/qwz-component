@@ -1,8 +1,6 @@
 package com.qinweizhao.component.exception.handler;
 
 import com.qinweizhao.component.exception.BizException;
-import com.qinweizhao.component.exception.SysException;
-import com.qinweizhao.component.exception.base.BaseException;
 import com.qinweizhao.component.modle.result.R;
 import com.sun.corba.se.impl.io.TypeMismatchException;
 import org.slf4j.Logger;
@@ -66,24 +64,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = BizException.class)
     @ResponseBody
-    public R<?> handleBusinessException(BaseException e) {
+    public R<?> handleBusinessException(BizException e) {
         log.error(e.getMessage(), e);
 
-        return R.failure(e.getErrCode(), e.getMessage());
-    }
-
-    /**
-     * 自定义异常
-     *
-     * @param e 异常
-     * @return 异常结果
-     */
-    @ExceptionHandler(value = SysException.class)
-    @ResponseBody
-    public R<?> handleBaseException(BaseException e) {
-        log.error(e.getMessage(), e);
-
-        return R.failure(e.getErrCode(), e.getMessage());
+        return R.failure(e.getCode(), e.getMessage());
     }
 
     /**

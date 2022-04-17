@@ -1,42 +1,59 @@
 package com.qinweizhao.component.exception.base;
 
-/**
- * Base Exception 是所有异常的父级
- *
- * @author qinweizhao
- * @since 2022/4/12
- */
-public abstract class BaseException extends RuntimeException {
+import cn.hutool.core.util.StrUtil;
+import com.qinweizhao.component.modle.result.ResultCode;
 
+/**
+ * @author qinweizhao
+ * @since 2022/4/18
+ */
+public class BaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    private String errCode;
+    private final String message;
 
-    public BaseException(String errMessage) {
-        super(errMessage);
+    private final int code;
+
+
+    public BaseException(ResultCode resultCode) {
+        super(resultCode.getMessage());
+        this.code = resultCode.getCode();
+        this.message = resultCode.getMessage();
     }
 
-    public BaseException(String errCode, String errMessage) {
-        super(errMessage);
-        this.errCode = errCode;
+
+    public BaseException(ResultCode resultCode, Object... args) {
+        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args));
     }
 
-    public BaseException(String errMessage, Throwable e) {
-        super(errMessage, e);
+    public BaseException(ResultCode resultCode, Throwable e) {
+        super(resultCode.getMessage(), e);
+        this.code = resultCode.getCode();
+        this.message = resultCode.getMessage();
     }
 
-    public BaseException(String errCode, String errMessage, Throwable e) {
-        super(errMessage, e);
-        this.errCode = errCode;
+    public BaseException(ResultCode resultCode, Throwable e, Object... args) {
+        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args), e);
     }
 
-    public String getErrCode() {
-        return errCode;
+    public BaseException(int code, String message) {
+        super(message);
+        this.message = message;
+        this.code = code;
     }
 
-    public void setErrCode(String errCode) {
-        this.errCode = errCode;
+    public BaseException(int code, String message, Throwable e) {
+        super(message, e);
+        this.message = message;
+        this.code = code;
     }
 
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public int getCode() {
+        return code;
+    }
 }
-

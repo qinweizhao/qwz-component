@@ -34,11 +34,11 @@ public class R<T> implements Serializable {
 
     }
 
-    private R(IResultCode resultCode) {
+    private R(ResultCode resultCode) {
         restResult(resultCode.getCode(), null, resultCode.getMsg());
     }
 
-    private R(IResultCode resultCode, T data) {
+    private R(ResultCode resultCode, T data) {
         restResult(resultCode.getCode(), data, resultCode.getMsg());
     }
 
@@ -51,11 +51,11 @@ public class R<T> implements Serializable {
         return restResult(SUCCESS, data, null);
     }
 
-    public static <T> R<T> success(IResultCode resultCode) {
+    public static <T> R<T> success(ResultCode resultCode) {
         return new R<>(resultCode, null);
     }
 
-    public static <T> R<T> success(IResultCode resultCode, T data) {
+    public static <T> R<T> success(ResultCode resultCode, T data) {
         return new R<>(resultCode, data);
     }
 
@@ -68,7 +68,7 @@ public class R<T> implements Serializable {
         return restResult(FAILURE, null, null);
     }
 
-    public static <T> R<T> failure(IResultCode resultCode) {
+    public static <T> R<T> failure(ResultCode resultCode) {
         return new R<>(resultCode);
     }
 

@@ -1,33 +1,42 @@
 package com.qinweizhao.component.exception;
 
+import cn.hutool.core.util.StrUtil;
 import com.qinweizhao.component.exception.base.BaseException;
+import com.qinweizhao.component.modle.result.ResultCode;
 
 /**
- * BizException 是已知异常，无需重试
+ * BizException 业务异常
  *
  * @author qinweizhao
  * @since 2022/4/12
  */
 public class BizException extends BaseException {
 
-    private static final long serialVersionUID = 1L;
+    public BizException(ResultCode resultCode) {
+        super(resultCode);
 
-    private static final String DEFAULT_ERR_CODE = "BIZ_ERROR";
-
-    public BizException(String errMessage) {
-        super(DEFAULT_ERR_CODE, errMessage);
     }
 
-    public BizException(String errCode, String errMessage) {
-        super(errCode, errMessage);
+    public BizException(ResultCode resultCode, Object... args) {
+        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args));
     }
 
-    public BizException(String errMessage, Throwable e) {
-        super(DEFAULT_ERR_CODE, errMessage, e);
+    public BizException(ResultCode resultCode, Throwable e) {
+        super(resultCode, e);
     }
 
-    public BizException(String errorCode, String errMessage, Throwable e) {
-        super(errorCode, errMessage, e);
+
+    public BizException(ResultCode resultCode, Throwable e, Object... args) {
+        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args), e);
+    }
+
+    public BizException(int code, String message) {
+        super(code, message);
+
+    }
+
+    public BizException(int code, String message, Throwable e) {
+        super(code, message, e);
     }
 
 }
