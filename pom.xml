@@ -25,7 +25,6 @@
         <module>qwz-component-exception-starter</module>
         <module>qwz-component-log-starter</module>
         <module>qwz-component-redis-starter</module>
-        <module>qwz-component-all</module>
         <module>qwz-component-util</module>
     </modules>
 
