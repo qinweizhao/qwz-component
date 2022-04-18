@@ -1,4 +1,4 @@
-package com.qinweizhao.component.exception.handler;
+package com.qinweizhao.component.web.handler;
 
 import com.qinweizhao.component.exception.BizException;
 import com.qinweizhao.component.modle.result.R;

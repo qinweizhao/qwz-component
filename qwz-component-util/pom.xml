@@ -13,71 +13,54 @@
 
     <properties>
         <fastjson.version>1.2.79</fastjson.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <qwz-component.version>1.0.0</qwz-component.version>
         <transmittable-thread-local.version>2.12.2</transmittable-thread-local.version>
-        <poi.version>4.1.2</poi.version>
     </properties>
 
 
     <dependencies>
+
         <!-- 线程传递值 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>transmittable-thread-local</artifactId>
             <version>${transmittable-thread-local.version}</version>
         </dependency>
+
         <!-- Apache Lang3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
-        <!-- excel工具 -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.qinweizhao.component</groupId>
-            <artifactId>qwz-component-model</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
+        <!-- FastJson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+
         <!-- Java Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
+
         <!-- Spring Context Support -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
-        <!-- Spring Web -->
+        <!-- Qwz-Component-->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>com.qinweizhao.component</groupId>
+            <artifactId>qwz-component-model</artifactId>
+            <version>${qwz-component.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
+
     </dependencies>
 
 </project>
