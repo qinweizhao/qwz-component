@@ -13,22 +13,35 @@
     <artifactId>qwz-component-starter-web</artifactId>
 
 
+    <properties>
+        <qwz-component.version>1.0.0</qwz-component.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>com.qinweizhao.component</groupId>
-            <artifactId>qwz-component-exception</artifactId>
-            <version>1.0.0</version>
+            <artifactId>qwz-component-util</artifactId>
+            <version>${qwz-component.version}</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.5.8</version>
+            <groupId>com.qinweizhao.component</groupId>
+            <artifactId>qwz-component-model</artifactId>
+            <version>${qwz-component.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.qinweizhao.component</groupId>
+            <artifactId>qwz-component-exception</artifactId>
+            <version>${qwz-component.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
