@@ -11,18 +11,21 @@
 
     <artifactId>qwz-component-exception</artifactId>
 
+    <properties>
+        <qwz-component.version>1.0.0</qwz-component.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.qinweizhao.component</groupId>
             <artifactId>qwz-component-model</artifactId>
-            <version>1.0.0</version>
+            <version>${qwz-component.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-            <version>5.7.19</version>
+            <groupId>com.qinweizhao.component</groupId>
+            <artifactId>qwz-component-util</artifactId>
+            <version>${qwz-component.version}</version>
         </dependency>
     </dependencies>
 </project>
