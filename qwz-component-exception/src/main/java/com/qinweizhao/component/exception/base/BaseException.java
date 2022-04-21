@@ -12,7 +12,7 @@ public class BaseException extends RuntimeException {
 
     private final String message;
 
-    private final int code;
+    private final String code;
 
 
     public BaseException(ResultCode resultCode) {
@@ -36,13 +36,13 @@ public class BaseException extends RuntimeException {
         this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args), e);
     }
 
-    public BaseException(int code, String message) {
+    public BaseException(String code, String message) {
         super(message);
         this.message = message;
         this.code = code;
     }
 
-    public BaseException(int code, String message, Throwable e) {
+    public BaseException(String code, String message, Throwable e) {
         super(message, e);
         this.message = message;
         this.code = code;
@@ -53,7 +53,7 @@ public class BaseException extends RuntimeException {
         return message;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 }

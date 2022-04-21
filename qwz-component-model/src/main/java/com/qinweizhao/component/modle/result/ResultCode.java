@@ -10,7 +10,7 @@ public interface ResultCode {
      *
      * @return 业务码
      */
-    Integer getCode();
+    String getCode();
 
     /**
      * 获取信息

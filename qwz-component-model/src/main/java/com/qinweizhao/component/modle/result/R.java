@@ -16,13 +16,13 @@ public class R<T> implements Serializable {
     /**
      * 成功
      */
-    public static final int SUCCESS = 200;
+    public static final String SUCCESS = "200";
     /**
      * 失败
      */
-    public static final int FAILURE = 500;
+    public static final String FAILURE = "500";
 
-    private int code;
+    private String code;
 
     private String msg;
 
@@ -90,7 +90,7 @@ public class R<T> implements Serializable {
     }
 
 
-    private static <T> R<T> restResult(int code, T data, String msg) {
+    private static <T> R<T> restResult(String code, T data, String msg) {
         R<T> r = new R<>();
         r.setCode(code);
         r.setData(data);
@@ -99,12 +99,11 @@ public class R<T> implements Serializable {
         return r;
     }
 
-
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
