@@ -26,8 +26,6 @@ public class R<T> implements Serializable {
 
     private String msg;
 
-    private long time;
-
     private T data;
 
     private R() {
@@ -95,7 +93,6 @@ public class R<T> implements Serializable {
         r.setCode(code);
         r.setData(data);
         r.setMsg(msg);
-        r.setTime(System.currentTimeMillis());
         return r;
     }
 
@@ -113,14 +110,6 @@ public class R<T> implements Serializable {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
     }
 
     public T getData() {

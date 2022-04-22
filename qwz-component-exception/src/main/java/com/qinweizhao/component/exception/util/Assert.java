@@ -21,7 +21,7 @@ public abstract class Assert {
      * @param errorCode  errorCode
      * @param errMessage errMessage
      */
-    public static void isTrue(boolean expression, int errorCode, String errMessage) {
+    public static void isTrue(boolean expression, String errorCode, String errMessage) {
         if (!expression) {
             throw new BizException(errorCode, errMessage);
         }
@@ -39,7 +39,7 @@ public abstract class Assert {
      * @param errorCode  errorCode
      * @param errMessage errMessage
      */
-    public static void isFalse(boolean expression, int errorCode, String errMessage) {
+    public static void isFalse(boolean expression, String errorCode, String errMessage) {
         if (expression) {
             throw new BizException(errorCode, errMessage);
         }
@@ -65,7 +65,7 @@ public abstract class Assert {
 //        isFalse(expression, "[Assertion failed] Must be false");
 //    }
 
-    public static void notNull(Object object, int errorCode, String errMessage) {
+    public static void notNull(Object object, String errorCode, String errMessage) {
         if (object == null) {
             throw new BizException(errorCode, errMessage);
         }
@@ -81,7 +81,7 @@ public abstract class Assert {
 //        notNull(object, "[Assertion failed] Must not null");
 //    }
 
-    public static void notEmpty(Collection<?> collection, int errorCode, String errMessage) {
+    public static void notEmpty(Collection<?> collection, String errorCode, String errMessage) {
         if (collection == null || collection.isEmpty()) {
             throw new BizException(errorCode, errMessage);
         }
@@ -97,7 +97,7 @@ public abstract class Assert {
 //        notEmpty(collection, "[Assertion failed] Collection must not be empty: it must contain at least 1 element");
 //    }
 
-    public static void notEmpty(Map<?, ?> map, int errorCode, String errMessage) {
+    public static void notEmpty(Map<?, ?> map, String errorCode, String errMessage) {
         if (map == null || map.isEmpty()) {
             throw new BizException(errorCode, errMessage);
         }

@@ -30,12 +30,12 @@ public class BizException extends BaseException {
         this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args), e);
     }
 
-    public BizException(int code, String message) {
+    public BizException(String code, String message) {
         super(code, message);
 
     }
 
-    public BizException(int code, String message, Throwable e) {
+    public BizException(String code, String message, Throwable e) {
         super(code, message, e);
     }
 
