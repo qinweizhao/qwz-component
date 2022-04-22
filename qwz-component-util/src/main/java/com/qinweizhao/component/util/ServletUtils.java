@@ -1,10 +1,7 @@
 package com.qinweizhao.component.util;
 
-import com.alibaba.fastjson.JSONObject;
-import com.qinweizhao.component.modle.result.R;
 import com.qinweizhao.component.util.constant.Constants;
 import com.qinweizhao.component.util.text.Convert;
-import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -256,8 +253,11 @@ public class ServletUtils {
     public static Mono<Void> webFluxResponseWriter(ServerHttpResponse response, String contentType, HttpStatus status, Object value, int code) {
         response.setStatusCode(status);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, contentType);
-        R<?> result = R.failure(code, value.toString());
-        DataBuffer dataBuffer = response.bufferFactory().wrap(JSONObject.toJSONString(result).getBytes());
-        return response.writeWith(Mono.just(dataBuffer));
+        // TODO
+//        R<?> result = R.failure(code, value.toString());
+//        DataBuffer dataBuffer = response.bufferFactory().wrap(JSONObject.toJSONString(result).getBytes());
+//        return response.writeWith(Mono.just(dataBuffer));
+        return null;
     }
+
 }

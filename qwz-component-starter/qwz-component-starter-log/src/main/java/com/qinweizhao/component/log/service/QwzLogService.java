@@ -1,7 +1,6 @@
 package com.qinweizhao.component.log.service;
 
 import com.qinweizhao.component.log.SysOperLog;
-import com.qinweizhao.component.modle.result.R;
 
 /**
  * @author qinweizhao
@@ -15,7 +14,6 @@ public interface QwzLogService {
      *
      * @param sysOperLog sysOperLog
      * @param inner      inner
-     * @return Boolean
      */
-    R<Boolean> saveLog(SysOperLog sysOperLog, String inner);
+    void saveLog(SysOperLog sysOperLog, String inner);
 }

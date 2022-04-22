@@ -32,7 +32,6 @@ public class BizException extends BaseException {
 
     public BizException(String code, String message) {
         super(code, message);
-
     }
 
     public BizException(String code, String message, Throwable e) {

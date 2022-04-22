@@ -16,11 +16,7 @@ public class R<T> implements Serializable {
     /**
      * 成功
      */
-    public static final String SUCCESS = "200";
-    /**
-     * 失败
-     */
-    public static final String FAILURE = "500";
+    public static final String SUCCESS = "00000";
 
     private String code;
 
@@ -28,66 +24,91 @@ public class R<T> implements Serializable {
 
     private T data;
 
+    /**
+     * 私有化构造函数
+     */
     private R() {
 
     }
 
-    private R(ResultCode resultCode) {
-        restResult(resultCode.getCode(), null, resultCode.getMessage());
-    }
-
-    private R(ResultCode resultCode, T data) {
-        restResult(resultCode.getCode(), data, resultCode.getMessage());
-    }
-
-
+    /**
+     * 成功-快速响应
+     *
+     * @param <T> T
+     * @return R
+     */
     public static <T> R<T> success() {
-        return new R<>();
+        return restResult(SUCCESS, null, "OK");
     }
 
+    /**
+     * 成功-携带数据的响应
+     *
+     * @param data data
+     * @param <T>  T
+     * @return R
+     */
     public static <T> R<T> success(T data) {
-        return restResult(SUCCESS, data, null);
+        return restResult(SUCCESS, data, "OK");
     }
 
-    public static <T> R<T> success(ResultCode resultCode) {
-        return new R<>(resultCode, null);
-    }
-
-    public static <T> R<T> success(ResultCode resultCode, T data) {
-        return new R<>(resultCode, data);
-    }
-
-    public static <T> R<T> success(T data, String msg) {
-        return restResult(SUCCESS, data, msg);
-    }
-
-
-    public static <T> R<T> failure() {
-        return restResult(FAILURE, null, null);
-    }
-
+    /**
+     * 失败-携带 ResultCode（强制统一管理错误码）
+     *
+     * @param resultCode resultCode
+     * @param <T>        T
+     * @return R
+     */
     public static <T> R<T> failure(ResultCode resultCode) {
-        return new R<>(resultCode);
+        if (resultCode == null) {
+            return new R<>();
+        }
+        return restResult(resultCode.getCode(), null, resultCode.getMessage());
     }
 
-    public static <T> R<T> failure(String msg) {
-        return restResult(FAILURE, null, msg);
-    }
 
-    public static <T> R<T> failure(T data, String msg) {
-        return restResult(FAILURE, data, msg);
+    /**
+     * 判断是否成功
+     *
+     * @param flag       flag
+     * @param resultCode resultCode
+     * @param <T>        T
+     * @return R
+     */
+    public static <T> R<T> condition(boolean flag, ResultCode resultCode) {
+        return flag ? success() : failure(resultCode);
     }
-
 
     public static <T> R<T> condition(boolean flag) {
-        return flag ? success() : failure();
+        return flag ? success() : failure(null);
     }
 
-    public static <T> R<T> condition(int i) {
-        return i > 0 ? success() : failure();
+    /**
+     * 判断是否成功
+     *
+     * @param count      flag
+     * @param resultCode resultCode
+     * @param <T>        T
+     * @return R
+     */
+    public static <T> R<T> condition(int count, ResultCode resultCode) {
+        return count > 0 ? success() : failure(resultCode);
+    }
+
+    public static <T> R<T> condition(int count) {
+        return count > 0 ? success() : failure(null);
     }
 
 
+    /**
+     * restResult
+     *
+     * @param code code
+     * @param data data
+     * @param msg  msg
+     * @param <T>  T
+     * @return R
+     */
     private static <T> R<T> restResult(String code, T data, String msg) {
         R<T> r = new R<>();
         r.setCode(code);
@@ -96,6 +117,12 @@ public class R<T> implements Serializable {
         return r;
     }
 
+
+    /**
+     * getter setter
+     *
+     * @return public
+     */
     public String getCode() {
         return code;
     }
