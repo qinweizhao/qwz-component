@@ -13,14 +13,10 @@ public class R<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 成功
-     */
-    public static final String SUCCESS = "00000";
 
     private String code;
 
-    private String msg;
+    private String message;
 
     private T data;
 
@@ -38,7 +34,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> success() {
-        return restResult(SUCCESS, null, "OK");
+        return restResult(ResultCodeEnum.SUCCESS.getCode(), null, ResultCodeEnum.SUCCESS.getMessage());
     }
 
     /**
@@ -49,11 +45,58 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> success(T data) {
-        return restResult(SUCCESS, data, "OK");
+        return restResult(ResultCodeEnum.SUCCESS.getCode(), data, ResultCodeEnum.SUCCESS.getMessage());
     }
 
     /**
-     * 失败-携带 ResultCode（强制统一管理错误码）
+     * 成功-携带数据和消息的响应
+     *
+     * @param data    data
+     * @param message message
+     * @param <T>     T
+     * @return R
+     */
+    public static <T> R<T> success(T data, String message) {
+        return restResult(ResultCodeEnum.SUCCESS.getCode(), data, message);
+    }
+
+    /**
+     * 失败-快速响应
+     *
+     * @param <T> T
+     * @return R
+     */
+    public static <T> R<T> failure() {
+
+        return restResult(ResultCodeEnum.FAILED.getCode(), null, ResultCodeEnum.FAILED.getMessage());
+    }
+
+
+    /**
+     * 失败-携带错误消息的响应
+     *
+     * @param message message
+     * @param <T>     T
+     * @return R
+     */
+    public static <T> R<T> failure(String message) {
+        return restResult(ResultCodeEnum.FAILED.getCode(), null, message);
+    }
+
+    /**
+     * 失败-携带错误码和错误消息的响应
+     *
+     * @param code    code
+     * @param message message
+     * @param <T>     T
+     * @return R
+     */
+    public static <T> R<T> failure(String code, String message) {
+        return restResult(code, null, message);
+    }
+
+    /**
+     * 失败-携带 ResultCode
      *
      * @param resultCode resultCode
      * @param <T>        T
@@ -66,6 +109,16 @@ public class R<T> implements Serializable {
         return restResult(resultCode.getCode(), null, resultCode.getMessage());
     }
 
+    /**
+     * 判断是否成功
+     *
+     * @param flag flag
+     * @param <T>  T
+     * @return R
+     */
+    public static <T> R<T> condition(boolean flag) {
+        return flag ? success() : failure();
+    }
 
     /**
      * 判断是否成功
@@ -79,8 +132,16 @@ public class R<T> implements Serializable {
         return flag ? success() : failure(resultCode);
     }
 
-    public static <T> R<T> condition(boolean flag) {
-        return flag ? success() : failure(null);
+
+    /**
+     * 判断是否成功
+     *
+     * @param count flag
+     * @param <T>   T
+     * @return R
+     */
+    public static <T> R<T> condition(int count) {
+        return count > 0 ? success() : failure();
     }
 
     /**
@@ -95,25 +156,21 @@ public class R<T> implements Serializable {
         return count > 0 ? success() : failure(resultCode);
     }
 
-    public static <T> R<T> condition(int count) {
-        return count > 0 ? success() : failure(null);
-    }
-
 
     /**
      * restResult
      *
-     * @param code code
-     * @param data data
-     * @param msg  msg
-     * @param <T>  T
+     * @param code    code
+     * @param data    data
+     * @param message message
+     * @param <T>     T
      * @return R
      */
-    private static <T> R<T> restResult(String code, T data, String msg) {
+    private static <T> R<T> restResult(String code, T data, String message) {
         R<T> r = new R<>();
         r.setCode(code);
         r.setData(data);
-        r.setMsg(msg);
+        r.setMessage(message);
         return r;
     }
 
@@ -131,12 +188,12 @@ public class R<T> implements Serializable {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {

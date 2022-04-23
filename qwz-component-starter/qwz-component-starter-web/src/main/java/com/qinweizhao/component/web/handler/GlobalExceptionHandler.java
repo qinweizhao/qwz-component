@@ -100,7 +100,7 @@ public class GlobalExceptionHandler {
 
         if (ENV_PROD.equals(profile)) {
             // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如404.
-            return R.failure(code, e.getMessage());
+            return R.failure(e.getMessage());
         }
 
         return R.failure(e.getMessage());
@@ -153,7 +153,7 @@ public class GlobalExceptionHandler {
 
         }
 
-        return R.failure(999, msg.substring(2));
+        return R.failure(msg.substring(2));
     }
 
     /**
