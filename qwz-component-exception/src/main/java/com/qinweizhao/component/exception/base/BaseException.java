@@ -14,6 +14,9 @@ public class BaseException extends RuntimeException {
 
     private final String code;
 
+    public BaseException(ResultCode resultCode, Object... args) {
+        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args));
+    }
 
     public BaseException(ResultCode resultCode) {
         super(resultCode.getMessage());
@@ -21,19 +24,14 @@ public class BaseException extends RuntimeException {
         this.message = resultCode.getMessage();
     }
 
-
-    public BaseException(ResultCode resultCode, Object... args) {
-        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args));
+    public BaseException(ResultCode resultCode, Throwable e, Object... args) {
+        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args), e);
     }
 
     public BaseException(ResultCode resultCode, Throwable e) {
         super(resultCode.getMessage(), e);
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
-    }
-
-    public BaseException(ResultCode resultCode, Throwable e, Object... args) {
-        this(resultCode.getCode(), StrUtil.format(resultCode.getMessage(), args), e);
     }
 
     public BaseException(String code, String message) {

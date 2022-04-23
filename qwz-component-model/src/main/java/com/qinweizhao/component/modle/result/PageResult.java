@@ -14,7 +14,7 @@ public class PageResult<T> {
     /**
      * 查询数据列表
      */
-    protected List<T> records = Collections.emptyList();
+    protected List<T> rows = Collections.emptyList();
 
     /**
      * 总数
@@ -28,17 +28,17 @@ public class PageResult<T> {
         this.total = total;
     }
 
-    public PageResult(List<T> records, long total) {
-        this.records = records;
+    public PageResult(List<T> rows, long total) {
+        this.rows = rows;
         this.total = total;
     }
 
-    public List<T> getRecords() {
-        return records;
+    public List<T> getRows() {
+        return rows;
     }
 
-    public void setRecords(List<T> records) {
-        this.records = records;
+    public void setRows(List<T> rows) {
+        this.rows = rows;
     }
 
     public Long getTotal() {
