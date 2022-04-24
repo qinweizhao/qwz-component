@@ -37,7 +37,6 @@ public enum ResultCodeEnum implements ResultCode {
     private final String message;
 
     ResultCodeEnum(String code, String message) {
-
         this.code = code;
         this.message = message;
     }

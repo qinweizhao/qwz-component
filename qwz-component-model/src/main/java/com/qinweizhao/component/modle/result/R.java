@@ -67,7 +67,6 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> failure() {
-
         return restResult(ResultCodeEnum.FAILED.getCode(), null, ResultCodeEnum.FAILED.getMessage());
     }
 
