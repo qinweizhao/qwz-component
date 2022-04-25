@@ -66,7 +66,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public R<?> handleBusinessException(BizException e) {
         log.error(e.getMessage(), e);
-
         return R.failure(e.getCode(), e.getMessage());
     }
 
