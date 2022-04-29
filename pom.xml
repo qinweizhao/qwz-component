@@ -22,6 +22,7 @@
     <modules>
         <module>qwz-component-model</module>
         <module>qwz-component-exception</module>
+        <module>qwz-component-mybatis</module>
         <module>qwz-component-starter</module>
         <module>qwz-component-util</module>
     </modules>

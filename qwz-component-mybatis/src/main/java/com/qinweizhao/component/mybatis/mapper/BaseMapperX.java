@@ -1,0 +1,39 @@
+package com.qinweizhao.component.mybatis.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn;
+import com.qinweizhao.component.modle.request.PageParam;
+import com.qinweizhao.component.mybatis.toolkit.PageUtils;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Collection;
+
+/**
+ * 所有的 Mapper接口 都需要继承当前接口 如果想自己定义其他的全局方法， 您的全局 BaseMapper 需要继承当前接口
+ *
+ * @author qinweizhao
+ */
+public interface BaseMapperX<T> extends BaseMapper<T> {
+
+    /**
+     * 根据 PageParam 生成一个 IPage 实例
+     *
+     * @param pageParam 分页参数
+     * @param <V>       返回的 Record 对象
+     * @return IPage<V>
+     */
+    default <V> IPage<V> prodPage(PageParam pageParam) {
+        return PageUtils.prodPage(pageParam);
+    }
+
+    /**
+     * 批量插入数据 实现类 {@link InsertBatchSomeColumn}
+     *
+     * @param list 数据列表
+     * @return int 改动行
+     * @author lingting 2020-08-26 22:11
+     */
+    int insertBatchSomeColumn(@Param("collection") Collection<T> list);
+
+}

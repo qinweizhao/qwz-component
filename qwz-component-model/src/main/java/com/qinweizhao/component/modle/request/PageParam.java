@@ -1,4 +1,4 @@
-package com.qinweizhao.component.modle.query;
+package com.qinweizhao.component.modle.request;
 
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author qinweizhao
  */
-public abstract class PageQuery {
+public abstract class PageParam {
     private static final long serialVersionUID = 1L;
 
     public static final String ASC = "ASC";
@@ -20,7 +20,7 @@ public abstract class PageQuery {
 
     private int pageSize = DEFAULT_PAGE_SIZE;
 
-    private int pageIndex = 1;
+    private int pageNum = 1;
 
     private String orderDirection = DESC;
 
@@ -29,7 +29,7 @@ public abstract class PageQuery {
     private boolean needTotalCount = true;
 
 
-    private List<PageQuery.Sort> sorts = new ArrayList<>();
+    private List<PageParam.Sort> sorts = new ArrayList<>();
 
     public static class Sort {
 
@@ -60,23 +60,23 @@ public abstract class PageQuery {
         }
     }
 
-    public List<PageQuery.Sort> getSorts() {
+    public List<PageParam.Sort> getSorts() {
         return sorts;
     }
 
-    public void setSorts(List<PageQuery.Sort> sorts) {
+    public void setSorts(List<PageParam.Sort> sorts) {
         this.sorts = sorts;
     }
 
-    public int getPageIndex() {
-        if (pageIndex < 1) {
+    public int getPageNum() {
+        if (pageNum < 1) {
             return 1;
         }
-        return pageIndex;
+        return pageNum;
     }
 
-    public PageQuery setPageIndex(int pageIndex) {
-        this.pageIndex = pageIndex;
+    public PageParam setPageNum(int pageIndex) {
+        this.pageNum = pageIndex;
         return this;
     }
 
@@ -87,7 +87,7 @@ public abstract class PageQuery {
         return pageSize;
     }
 
-    public PageQuery setPageSize(int pageSize) {
+    public PageParam setPageSize(int pageSize) {
         if (pageSize < 1) {
             pageSize = DEFAULT_PAGE_SIZE;
         }
@@ -96,14 +96,14 @@ public abstract class PageQuery {
     }
 
     public int getOffset() {
-        return (getPageIndex() - 1) * getPageSize();
+        return (getPageNum() - 1) * getPageSize();
     }
 
     public String getOrderDirection() {
         return orderDirection;
     }
 
-    public PageQuery setOrderDirection(String orderDirection) {
+    public PageParam setOrderDirection(String orderDirection) {
         if (ASC.equalsIgnoreCase(orderDirection) || DESC.equalsIgnoreCase(orderDirection)) {
             this.orderDirection = orderDirection;
         }
