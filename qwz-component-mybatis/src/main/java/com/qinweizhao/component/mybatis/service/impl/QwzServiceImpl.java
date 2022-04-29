@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.*;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.qinweizhao.component.mybatis.mapper.BaseMapperX;
+import com.qinweizhao.component.mybatis.mapper.QwzBaseMapper;
 import com.qinweizhao.component.mybatis.service.QwzService;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.logging.Log;
@@ -27,7 +27,7 @@ import java.util.function.BiConsumer;
  * @author qinweizhao
  */
 @SuppressWarnings("unchecked")
-public class QwzServiceImpl<M extends BaseMapperX<T>, T> implements QwzService<T> {
+public class QwzServiceImpl<M extends QwzBaseMapper<T>, T> implements QwzService<T> {
 
 	// ======= Copy From com.baomidou.mybatisplus.extension.service.impl.ServiceImpl 开始
 	// =======

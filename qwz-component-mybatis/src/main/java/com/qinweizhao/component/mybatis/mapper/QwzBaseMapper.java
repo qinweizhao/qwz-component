@@ -14,7 +14,7 @@ import java.util.Collection;
  *
  * @author qinweizhao
  */
-public interface BaseMapperX<T> extends BaseMapper<T> {
+public interface QwzBaseMapper<T> extends BaseMapper<T> {
 
     /**
      * 根据 PageParam 生成一个 IPage 实例
