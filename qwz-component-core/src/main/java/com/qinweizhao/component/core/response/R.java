@@ -72,17 +72,6 @@ public class R<T> implements Serializable {
 
 
     /**
-     * 失败-携带错误消息的响应
-     *
-     * @param message message
-     * @param <T>     T
-     * @return R
-     */
-    public static <T> R<T> failure(String message) {
-        return restResult(SystemResultCodeEnum.SERVER_ERROR.getCode(), null, message);
-    }
-
-    /**
      * 失败-携带错误码和错误消息的响应
      *
      * @param code    code
@@ -108,16 +97,6 @@ public class R<T> implements Serializable {
         return restResult(resultCode.getCode(), null, resultCode.getMessage());
     }
 
-    /**
-     * 判断是否成功
-     *
-     * @param flag flag
-     * @param <T>  T
-     * @return R
-     */
-    public static <T> R<T> condition(boolean flag) {
-        return flag ? success() : failure();
-    }
 
     /**
      * 判断是否成功
@@ -131,17 +110,6 @@ public class R<T> implements Serializable {
         return flag ? success() : failure(resultCode);
     }
 
-
-    /**
-     * 判断是否成功
-     *
-     * @param count flag
-     * @param <T>   T
-     * @return R
-     */
-    public static <T> R<T> condition(int count) {
-        return count > 0 ? success() : failure();
-    }
 
     /**
      * 判断是否成功

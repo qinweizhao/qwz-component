@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.qinweizhao.component.web.handler.GlobalExceptionHandler
+com.qinweizhao.component.web.handler.GlobalExceptionHandlerResolver

@@ -41,10 +41,10 @@ import javax.xml.bind.ValidationException;
 @Component
 @RestControllerAdvice
 @ConditionalOnWebApplication
-@ConditionalOnMissingBean(GlobalExceptionHandler.class)
-public class GlobalExceptionHandler {
+@ConditionalOnMissingBean(GlobalExceptionHandlerResolver.class)
+public class GlobalExceptionHandlerResolver {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandlerResolver.class);
 
     /**
      * 生产环境
