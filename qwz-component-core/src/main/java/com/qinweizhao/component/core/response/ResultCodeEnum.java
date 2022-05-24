@@ -1,4 +1,4 @@
-package com.qinweizhao.component.modle.result;
+package com.qinweizhao.component.core.response;
 
 /**
  * @author qinweizhao
@@ -7,7 +7,7 @@ package com.qinweizhao.component.modle.result;
 public enum ResultCodeEnum implements ResultCode {
 
     /**
-     * 服务未找到
+     * 资源未找到
      */
     NOT_FOUND("404", "服务未找到"),
 
@@ -20,11 +20,6 @@ public enum ResultCodeEnum implements ResultCode {
      * 系统异常,请稍后再试
      */
     FAILED("500", "系统异常,请稍后再试"),
-
-    /**
-     * 参数为空
-     */
-    BAD_REQUEST("400", "请求异常"),
 
     /**
      * 用户未认证

@@ -1,4 +1,4 @@
-package com.qinweizhao.component.modle.entity;
+package com.qinweizhao.component.core.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

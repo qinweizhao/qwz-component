@@ -1,4 +1,4 @@
-package com.qinweizhao.component.modle.request;
+package com.qinweizhao.component.core.request;
 
 
 import java.util.ArrayList;

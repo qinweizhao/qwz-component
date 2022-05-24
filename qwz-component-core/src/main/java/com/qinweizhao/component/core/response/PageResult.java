@@ -1,4 +1,4 @@
-package com.qinweizhao.component.modle.result;
+package com.qinweizhao.component.core.response;
 
 
 import java.util.Collections;
