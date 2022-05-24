@@ -1,21 +1,22 @@
 package com.qinweizhao.component.web.handler;
 
-import com.qinweizhao.component.exception.BizException;
-import com.qinweizhao.component.modle.result.R;
-import com.sun.corba.se.impl.io.TypeMismatchException;
+import com.qinweizhao.component.core.exception.BaseException;
+import com.qinweizhao.component.core.exception.BizException;
+import com.qinweizhao.component.core.response.R;
+import com.qinweizhao.component.core.response.SystemResultCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.ConversionNotSupportedException;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -24,11 +25,13 @@ import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import javax.xml.bind.ValidationException;
 
 
 /**
@@ -52,22 +55,9 @@ public class GlobalExceptionHandler {
     /**
      * 当前环境
      */
-    @Value("${spring.profiles.active}")
+    @Value("${spring.profiles.active:prod}")
     private String profile;
 
-
-    /**
-     * 业务异常
-     *
-     * @param e 异常
-     * @return 异常结果
-     */
-    @ExceptionHandler(value = BizException.class)
-    @ResponseBody
-    public R<?> handleBusinessException(BizException e) {
-        log.error(e.getMessage(), e);
-        return R.failure(e.getCode(), e.getMessage());
-    }
 
     /**
      * Controller上一层相关异常
@@ -84,93 +74,70 @@ public class GlobalExceptionHandler {
             TypeMismatchException.class,
             HttpMessageNotReadableException.class,
             HttpMessageNotWritableException.class,
-            // BindException.class,
-            // MethodArgumentNotValidException.class
+            BindException.class,
+            MethodArgumentNotValidException.class,
             HttpMediaTypeNotAcceptableException.class,
             ServletRequestBindingException.class,
             ConversionNotSupportedException.class,
             MissingServletRequestPartException.class,
-            AsyncRequestTimeoutException.class
+            AsyncRequestTimeoutException.class,
+            ValidationException.class
     })
-    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public R<?> handleServletException(Exception e) {
-        log.error(e.getMessage(), e);
-        int code = 999;
+        String errorMessage;
+        if (e instanceof BindException) {
+            BindingResult bindingResult = ((BindException) e).getBindingResult();
+            errorMessage = bindingResult.getErrorCount() > 0 ? bindingResult.getAllErrors().get(0).getDefaultMessage()
+                    : "未获取到错误信息!";
+            log.error("请求异常-参数绑定异常,ex = {}", errorMessage);
+        } else {
+            log.error("请求异常 ex={}", e.getMessage());
+            errorMessage = ENV_PROD.equals(profile) ? SystemResultCodeEnum.BAD_REQUEST.getMessage() : e.getMessage();
 
-        if (ENV_PROD.equals(profile)) {
-            // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如404.
-            return R.failure(e.getMessage());
         }
-
-        return R.failure(e.getMessage());
+        return R.failure(SystemResultCodeEnum.BAD_REQUEST.getCode(), errorMessage);
     }
 
-
     /**
-     * 参数绑定异常
+     * 业务异常
      *
      * @param e 异常
      * @return 异常结果
      */
-    @ExceptionHandler(value = BindException.class)
-    @ResponseBody
-    public R<?> handleBindException(BindException e) {
-        log.error("参数绑定校验异常", e);
-
-        return wrapperBindingResult(e.getBindingResult());
+    @ExceptionHandler(value = BizException.class)
+    public R<?> handleBusinessException(BizException e) {
+        log.error("业务异常信息 ex={}", e.getMessage());
+        return R.failure(e.getCode(), e.getMessage());
     }
 
+
     /**
-     * 参数校验异常，将校验失败的所有异常组合成一条错误信息
+     * 自定义异常
      *
      * @param e 异常
      * @return 异常结果
      */
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    @ResponseBody
-    public R<?> handleValidException(MethodArgumentNotValidException e) {
-        log.error("参数绑定校验异常", e);
-
-        return wrapperBindingResult(e.getBindingResult());
+    @ExceptionHandler(value = BaseException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public R<?> handleBaseException(BaseException e) {
+        log.error("自定义异常信息 ex={}", e.getMessage());
+        return R.failure(e.getCode(), e.getMessage());
     }
 
-    /**
-     * 包装绑定异常结果
-     *
-     * @param bindingResult 绑定结果
-     * @return 异常结果
-     */
-    private R<?> wrapperBindingResult(BindingResult bindingResult) {
-        StringBuilder msg = new StringBuilder();
-
-        for (ObjectError error : bindingResult.getAllErrors()) {
-            msg.append(", ");
-            if (error instanceof FieldError) {
-                msg.append(((FieldError) error).getField()).append(": ");
-            }
-            msg.append(error.getDefaultMessage() == null ? "" : error.getDefaultMessage());
-
-        }
-
-        return R.failure(msg.substring(2));
-    }
 
     /**
      * 未定义异常
      *
-     * @param e 异常
-     * @return 异常结果
+     * @param e the e
+     * @return R
      */
-    @ExceptionHandler(value = Exception.class)
-    @ResponseBody
-    public R<?> handleException(Exception e) {
-        log.error(e.getMessage(), e);
-        if (ENV_PROD.equals(profile)) {
-            // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.
-            return R.failure(e.getMessage());
-        }
-
-        return R.failure(e.getMessage());
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public R<String> handleException(Exception e) {
+        log.error("全局异常信息 ex={}", e.getMessage(), e);
+        // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.
+        String errorMessage = ENV_PROD.equals(profile) ? SystemResultCodeEnum.SERVER_ERROR.getMessage() : e.getLocalizedMessage();
+        return R.failure(SystemResultCodeEnum.SERVER_ERROR.getCode(), errorMessage);
     }
-
 }

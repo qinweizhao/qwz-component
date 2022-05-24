@@ -33,14 +33,7 @@
 
         <dependency>
             <groupId>com.qinweizhao.component</groupId>
-            <artifactId>qwz-component-model</artifactId>
-            <version>${qwz-component.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.qinweizhao.component</groupId>
-            <artifactId>qwz-component-exception</artifactId>
+            <artifactId>qwz-component-core</artifactId>
             <version>${qwz-component.version}</version>
             <scope>compile</scope>
         </dependency>

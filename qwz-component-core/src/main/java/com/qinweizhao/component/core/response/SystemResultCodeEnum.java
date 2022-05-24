@@ -34,7 +34,7 @@ public enum SystemResultCodeEnum implements ResultCode {
     /**
      * 异常
      */
-    SERVER_ERROR("500", "系统异常,请稍后再试");
+    SERVER_ERROR("500", "系统异常,请联系管理员");
 
 
     private final String code;
