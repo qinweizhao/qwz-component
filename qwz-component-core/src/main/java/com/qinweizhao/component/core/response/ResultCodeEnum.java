@@ -17,7 +17,7 @@ public enum ResultCodeEnum implements ResultCode {
     SUCCESS("200", "操作成功"),
 
     /**
-     * 系统异常,请稍后再试
+     * 系统异常
      */
     FAILED("500", "系统异常,请稍后再试"),
 

@@ -15,13 +15,13 @@ public abstract class BaseException extends RuntimeException {
 
     private final String code;
 
-    public BaseException(ResultCode resultCode) {
+    public <T extends ResultCode> BaseException(T resultCode) {
         super(resultCode.getMessage());
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
     }
 
-    public BaseException(ResultCode resultCode, Throwable e) {
+    public  <T extends ResultCode> BaseException(T resultCode, Throwable e) {
         super(resultCode.getMessage(), e);
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
