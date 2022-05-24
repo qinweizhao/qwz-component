@@ -34,7 +34,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> success() {
-        return restResult(ResultCodeEnum.SUCCESS.getCode(), null, ResultCodeEnum.SUCCESS.getMessage());
+        return restResult(SystemResultCodeEnum.SUCCESS.getCode(), null, SystemResultCodeEnum.SUCCESS.getMessage());
     }
 
     /**
@@ -45,7 +45,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> success(T data) {
-        return restResult(ResultCodeEnum.SUCCESS.getCode(), data, ResultCodeEnum.SUCCESS.getMessage());
+        return restResult(SystemResultCodeEnum.SUCCESS.getCode(), data, SystemResultCodeEnum.SUCCESS.getMessage());
     }
 
     /**
@@ -57,7 +57,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> success(T data, String message) {
-        return restResult(ResultCodeEnum.SUCCESS.getCode(), data, message);
+        return restResult(SystemResultCodeEnum.SUCCESS.getCode(), data, message);
     }
 
     /**
@@ -67,7 +67,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> failure() {
-        return restResult(ResultCodeEnum.FAILED.getCode(), null, ResultCodeEnum.FAILED.getMessage());
+        return restResult(SystemResultCodeEnum.SERVER_ERROR.getCode(), null, SystemResultCodeEnum.SERVER_ERROR.getMessage());
     }
 
 
@@ -79,7 +79,7 @@ public class R<T> implements Serializable {
      * @return R
      */
     public static <T> R<T> failure(String message) {
-        return restResult(ResultCodeEnum.FAILED.getCode(), null, message);
+        return restResult(SystemResultCodeEnum.SERVER_ERROR.getCode(), null, message);
     }
 
     /**
