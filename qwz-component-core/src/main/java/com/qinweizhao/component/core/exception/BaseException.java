@@ -7,7 +7,7 @@ import com.qinweizhao.component.core.response.ResultCode;
  * @author qinweizhao
  * @since 2022/4/18
  */
-public class BaseException extends RuntimeException {
+public abstract class BaseException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,18 +25,6 @@ public class BaseException extends RuntimeException {
         super(resultCode.getMessage(), e);
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
-    }
-
-    public BaseException(String code, String message) {
-        super(message);
-        this.message = message;
-        this.code = code;
-    }
-
-    public BaseException(String code, String message, Throwable e) {
-        super(message, e);
-        this.message = message;
-        this.code = code;
     }
 
     @Override
