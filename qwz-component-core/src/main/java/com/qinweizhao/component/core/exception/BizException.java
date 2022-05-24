@@ -1,7 +1,6 @@
 package com.qinweizhao.component.core.exception;
 
-import com.qinweizhao.component.core.exception.BaseException;
-import com.qinweizhao.component.core.response.SystemResultCodeEnum;
+import com.qinweizhao.component.core.response.ResultCode;
 
 /**
  * BizException 业务异常
@@ -11,12 +10,12 @@ import com.qinweizhao.component.core.response.SystemResultCodeEnum;
  */
 public class BizException extends BaseException {
 
-    public BizException(String errMsg) {
-        super(SystemResultCodeEnum.SERVER_ERROR.getCode(), errMsg);
+    public BizException(ResultCode resultCode) {
+        super(resultCode);
     }
 
-    public BizException(String errMsg, Throwable e) {
-        super(SystemResultCodeEnum.SERVER_ERROR.getCode(), errMsg, e);
+    public BizException(ResultCode resultCode, Throwable e) {
+        super(resultCode, e);
     }
 
 }
