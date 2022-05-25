@@ -2,7 +2,7 @@ package com.qinweizhao.component.mybatis.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.qinweizhao.component.modle.request.PageParam;
+import com.qinweizhao.component.core.request.PageParam;
 import com.qinweizhao.component.mybatis.toolkit.PageUtils;
 
 /**

@@ -3,7 +3,7 @@ package com.qinweizhao.component.mybatis.toolkit;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.qinweizhao.component.modle.request.PageParam;
+import com.qinweizhao.component.core.request.PageParam;
 
 import java.util.List;
 

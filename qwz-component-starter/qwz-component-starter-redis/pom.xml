@@ -12,7 +12,9 @@
 
     <artifactId>qwz-component-starter-redis</artifactId>
 
-
+    <properties>
+        <qwz-component.version>1.0.0</qwz-component.version>
+    </properties>
 
     <dependencies>
 
@@ -26,7 +28,7 @@
         <dependency>
             <groupId>com.qinweizhao.component</groupId>
             <artifactId>qwz-component-util</artifactId>
-            <version>1.0.0</version>
+            <version>${qwz-component.version}</version>
         </dependency>
 
     </dependencies>
