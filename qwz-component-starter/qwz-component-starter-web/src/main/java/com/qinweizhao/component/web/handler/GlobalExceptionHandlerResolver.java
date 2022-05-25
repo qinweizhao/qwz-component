@@ -11,7 +11,6 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
@@ -83,7 +81,6 @@ public class GlobalExceptionHandlerResolver {
             AsyncRequestTimeoutException.class,
             ValidationException.class
     })
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public R<?> handleServletException(Exception e) {
         String errorMessage;
         if (e instanceof BindException) {
@@ -119,7 +116,6 @@ public class GlobalExceptionHandlerResolver {
      * @return 异常结果
      */
     @ExceptionHandler(value = BaseException.class)
-    @ResponseStatus(HttpStatus.OK)
     public R<?> handleBaseException(BaseException e) {
         log.error("自定义异常信息 ex={}", e.getMessage());
         return R.failure(e.getCode(), e.getMessage());
@@ -133,7 +129,6 @@ public class GlobalExceptionHandlerResolver {
      * @return R
      */
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R<String> handleException(Exception e) {
         log.error("全局异常信息 ex={}", e.getMessage(), e);
         // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.

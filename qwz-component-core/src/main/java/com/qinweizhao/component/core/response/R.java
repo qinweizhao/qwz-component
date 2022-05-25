@@ -70,6 +70,18 @@ public class R<T> implements Serializable {
         return restResult(SystemResultCodeEnum.SERVER_ERROR.getCode(), null, SystemResultCodeEnum.SERVER_ERROR.getMessage());
     }
 
+
+    /**
+     * 失败-携带错误消息的响应
+     *
+     * @param message message
+     * @param <T>     T
+     * @return R
+     */
+    public static <T> R<T> failure(String message) {
+        return restResult(SystemResultCodeEnum.SERVER_ERROR.getCode(), null, message);
+    }
+
     /**
      * 失败-携带错误码和错误消息的响应
      *
