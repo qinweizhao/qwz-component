@@ -3,6 +3,7 @@ package com.qinweizhao.component.mybatis.service;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.qinweizhao.component.core.response.PageResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;

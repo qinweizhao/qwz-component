@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.*;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import com.qinweizhao.component.core.response.PageResult;
 import com.qinweizhao.component.mybatis.mapper.QwzBaseMapper;
 import com.qinweizhao.component.mybatis.service.QwzService;
 import org.apache.ibatis.binding.MapperMethod;
