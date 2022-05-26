@@ -1,7 +1,7 @@
 package com.qinweizhao.component.mybatis.toolkit;
 
 
-import com.qinweizhao.component.mybatis.query.LambdaQueryWrapperX;
+import com.qinweizhao.component.mybatis.query.QwzLambdaQueryWrapper;
 
 /**
  * @author qinweizhao
@@ -17,8 +17,8 @@ public final class WrappersX {
      * @param <T> 实体类泛型
      * @return LambdaQueryWrapperX&lt;T&gt;
      */
-    public static <T> LambdaQueryWrapperX<T> lambdaQueryX() {
-        return new LambdaQueryWrapperX<>();
+    public static <T> QwzLambdaQueryWrapper<T> lambdaQueryX() {
+        return new QwzLambdaQueryWrapper<>();
     }
 
     /**
@@ -28,8 +28,8 @@ public final class WrappersX {
      * @param <T>    实体类泛型
      * @return LambdaQueryWrapperX&lt;T&gt;
      */
-    public static <T> LambdaQueryWrapperX<T> lambdaQueryX(T entity) {
-        return new LambdaQueryWrapperX<>(entity);
+    public static <T> QwzLambdaQueryWrapper<T> lambdaQueryX(T entity) {
+        return new QwzLambdaQueryWrapper<>(entity);
     }
 
     /**
@@ -40,8 +40,8 @@ public final class WrappersX {
      * @return LambdaQueryWrapperX&lt;T&gt;
      * @since 3.3.1
      */
-    public static <T> LambdaQueryWrapperX<T> lambdaQueryX(Class<T> entityClass) {
-        return new LambdaQueryWrapperX<>(entityClass);
+    public static <T> QwzLambdaQueryWrapper<T> lambdaQueryX(Class<T> entityClass) {
+        return new QwzLambdaQueryWrapper<>(entityClass);
     }
 
 }

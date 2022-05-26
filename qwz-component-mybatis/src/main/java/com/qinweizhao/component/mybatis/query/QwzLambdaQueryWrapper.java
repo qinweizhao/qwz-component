@@ -23,8 +23,8 @@ import java.util.function.Predicate;
  *
  * @author qinweizhao
  */
-public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQueryWrapperX<T>>
-		implements Query<LambdaQueryWrapperX<T>, T, SFunction<T, ?>> {
+public class QwzLambdaQueryWrapper<T> extends AbstractLambdaWrapper<T, QwzLambdaQueryWrapper<T>>
+		implements Query<QwzLambdaQueryWrapper<T>, T, SFunction<T, ?>> {
 
 	/**
 	 * 查询字段
@@ -34,14 +34,14 @@ public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQuery
 	/**
 	 * 不建议直接 new 该实例，使用 WrappersX.lambdaQueryX(entity)
 	 */
-	public LambdaQueryWrapperX() {
+	public QwzLambdaQueryWrapper() {
 		this((T) null);
 	}
 
 	/**
 	 * 不建议直接 new 该实例，使用 WrappersX.lambdaQueryX(entity)
 	 */
-	public LambdaQueryWrapperX(T entity) {
+	public QwzLambdaQueryWrapper(T entity) {
 		super.setEntity(entity);
 		super.initNeed();
 	}
@@ -49,7 +49,7 @@ public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQuery
 	/**
 	 * 不建议直接 new 该实例，使用 Wrappers.lambdaQuery(entity)
 	 */
-	public LambdaQueryWrapperX(Class<T> entityClass) {
+	public QwzLambdaQueryWrapper(Class<T> entityClass) {
 		super.setEntityClass(entityClass);
 		super.initNeed();
 	}
@@ -57,9 +57,9 @@ public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQuery
 	/**
 	 * 不建议直接 new 该实例，使用 Wrappers.lambdaQuery(...)
 	 */
-	LambdaQueryWrapperX(T entity, Class<T> entityClass, SharedString sqlSelect, AtomicInteger paramNameSeq,
-						Map<String, Object> paramNameValuePairs, MergeSegments mergeSegments, SharedString lastSql,
-						SharedString sqlComment, SharedString sqlFirst) {
+	QwzLambdaQueryWrapper(T entity, Class<T> entityClass, SharedString sqlSelect, AtomicInteger paramNameSeq,
+						  Map<String, Object> paramNameValuePairs, MergeSegments mergeSegments, SharedString lastSql,
+						  SharedString sqlComment, SharedString sqlFirst) {
 		super.setEntity(entity);
 		super.setEntityClass(entityClass);
 		this.paramNameSeq = paramNameSeq;
@@ -78,7 +78,7 @@ public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQuery
 	 */
 	@SafeVarargs
 	@Override
-	public final LambdaQueryWrapperX<T> select(SFunction<T, ?>... columns) {
+	public final QwzLambdaQueryWrapper<T> select(SFunction<T, ?>... columns) {
 		if (ArrayUtils.isNotEmpty(columns)) {
 			this.sqlSelect.setStringValue(columnsToString(false, columns));
 		}
@@ -107,7 +107,7 @@ public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQuery
 	 * @return this
 	 */
 	@Override
-	public LambdaQueryWrapperX<T> select(Class<T> entityClass, Predicate<TableFieldInfo> predicate) {
+	public QwzLambdaQueryWrapper<T> select(Class<T> entityClass, Predicate<TableFieldInfo> predicate) {
 		if (entityClass == null) {
 			entityClass = getEntityClass();
 		} else {
@@ -130,8 +130,8 @@ public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQuery
 	 * </p>
 	 */
 	@Override
-	protected LambdaQueryWrapperX<T> instance() {
-		return new LambdaQueryWrapperX<>(getEntity(), getEntityClass(), null, paramNameSeq, paramNameValuePairs,
+	protected QwzLambdaQueryWrapper<T> instance() {
+		return new QwzLambdaQueryWrapper<>(getEntity(), getEntityClass(), null, paramNameSeq, paramNameValuePairs,
 				new MergeSegments(), SharedString.emptyString(), SharedString.emptyString(),
 				SharedString.emptyString());
 	}
@@ -166,59 +166,59 @@ public class LambdaQueryWrapperX<T> extends AbstractLambdaWrapper<T, LambdaQuery
 		return true;
 	}
 
-	public LambdaQueryWrapperX<T> eqIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> eqIfPresent(SFunction<T, ?> column, Object val) {
 		return super.eq(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> neIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> neIfPresent(SFunction<T, ?> column, Object val) {
 		return super.ne(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> gtIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> gtIfPresent(SFunction<T, ?> column, Object val) {
 		return super.gt(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> geIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> geIfPresent(SFunction<T, ?> column, Object val) {
 		return super.ge(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> ltIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> ltIfPresent(SFunction<T, ?> column, Object val) {
 		return super.lt(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> leIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> leIfPresent(SFunction<T, ?> column, Object val) {
 		return super.le(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> likeIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> likeIfPresent(SFunction<T, ?> column, Object val) {
 		return super.like(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> notLikeIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> notLikeIfPresent(SFunction<T, ?> column, Object val) {
 		return super.notLike(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> likeLeftIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> likeLeftIfPresent(SFunction<T, ?> column, Object val) {
 		return super.likeLeft(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> likeRightIfPresent(SFunction<T, ?> column, Object val) {
+	public QwzLambdaQueryWrapper<T> likeRightIfPresent(SFunction<T, ?> column, Object val) {
 		return super.likeRight(isPresent(val), column, val);
 	}
 
-	public LambdaQueryWrapperX<T> inIfPresent(SFunction<T, ?> column, Object... values) {
+	public QwzLambdaQueryWrapper<T> inIfPresent(SFunction<T, ?> column, Object... values) {
 		return super.in(isPresent(values), column, values);
 	}
 
-	public LambdaQueryWrapperX<T> inIfPresent(SFunction<T, ?> column, Collection<?> values) {
+	public QwzLambdaQueryWrapper<T> inIfPresent(SFunction<T, ?> column, Collection<?> values) {
 		return super.in(isPresent(values), column, values);
 	}
 
-	public LambdaQueryWrapperX<T> notInIfPresent(SFunction<T, ?> column, Object... values) {
+	public QwzLambdaQueryWrapper<T> notInIfPresent(SFunction<T, ?> column, Object... values) {
 		return super.notIn(isPresent(values), column, values);
 	}
 
-	public LambdaQueryWrapperX<T> notInIfPresent(SFunction<T, ?> column, Collection<?> values) {
+	public QwzLambdaQueryWrapper<T> notInIfPresent(SFunction<T, ?> column, Collection<?> values) {
 		return super.notIn(isPresent(values), column, values);
 	}
 
