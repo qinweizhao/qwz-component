@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
@@ -36,7 +37,7 @@ import java.util.Map;
 public class LogAspect {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
-    @Autowired
+    @Resource
     private AsyncLogService asyncLogService;
 
     /**
