@@ -2,9 +2,10 @@ package com.qinweizhao.component.log.service;
 
 import com.qinweizhao.component.log.SysOperLog;
 import com.qinweizhao.component.util.constant.SecurityConstants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * 异步调用日志服务
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AsyncLogService {
 
-    @Autowired
+    @Resource
     private QwzLogService qwzLogService;
 
     /**
