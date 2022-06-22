@@ -16,12 +16,12 @@ public abstract class BaseEntity implements Serializable {
     /**
      * 创建者
      */
-    private Integer createBy;
+    private String createBy;
 
     /**
      * 更新者
      */
-    private Integer updateBy;
+    private String updateBy;
 
     /**
      * 创建时间
@@ -34,19 +34,19 @@ public abstract class BaseEntity implements Serializable {
     private LocalDateTime updateTime;
 
 
-    public Integer getCreateBy() {
+    public String getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(Integer createBy) {
+    public void setCreateBy(String createBy) {
         this.createBy = createBy;
     }
 
-    public Integer getUpdateBy() {
+    public String getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Integer updateBy) {
+    public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy;
     }
 
@@ -64,5 +64,15 @@ public abstract class BaseEntity implements Serializable {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseEntity{" +
+                "createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }
