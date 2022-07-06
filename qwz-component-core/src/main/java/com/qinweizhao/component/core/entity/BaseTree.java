@@ -9,6 +9,11 @@ import java.util.List;
 public abstract class BaseTree<T> {
 
     /**
+     * 父 ID
+     */
+    private Long parentId;
+
+    /**
      * 子元素
      */
     private List<T> children;
@@ -19,5 +24,13 @@ public abstract class BaseTree<T> {
 
     public void setChildren(List<T> children) {
         this.children = children;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 }
