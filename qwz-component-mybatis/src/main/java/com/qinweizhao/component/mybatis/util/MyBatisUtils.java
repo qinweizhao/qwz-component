@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 /**
  * MyBatis 工具类
+ * @author qinweizhao
+ * @since 2022/4/29
  */
 public class MyBatisUtils {
 

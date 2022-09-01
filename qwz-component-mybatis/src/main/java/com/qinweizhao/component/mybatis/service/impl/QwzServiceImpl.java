@@ -20,14 +20,11 @@ import java.util.Objects;
 import java.util.function.BiConsumer;
 
 /**
- * 以前继承 com.baomidou.mybatisplus.extension.service.impl.ServiceImpl 的实现类，现在继承本类
- *
  * @author qinweizhao
  * @since 2022/4/29
  */
 @SuppressWarnings("unchecked")
 public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> {
-
 
     protected Log log = LogFactory.getLog(getClass());
 
@@ -87,7 +84,6 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
      *
      * @param sqlMethod 方法名
      * @return 命名id
-     * @since 3.4.0
      */
     protected String getSqlStatement(SqlMethod sqlMethod) {
         return SqlHelper.getSqlStatement(mapperClass, sqlMethod);
@@ -108,7 +104,7 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
             String keyProperty = tableInfo.getKeyProperty();
             Assert.notEmpty(keyProperty, "error: can not execute. because can not find column for id from entity!");
             Object idVal = tableInfo.getPropertyValue(entity, tableInfo.getKeyProperty());
-            return StringUtils.checkValNull(idVal) || Objects.isNull(getById((Serializable) idVal)) ? save(entity)
+            return StringUtils.checkValNull(idVal) || Objects.isNull(baseMapper.selectById((Serializable) idVal)) ? save(entity)
                     : updateById(entity);
         }
         return false;
@@ -152,7 +148,6 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
      * @param consumer  执行方法
      * @param <E>       泛型
      * @return 操作结果
-     * @since 3.3.1
      */
     protected <E> boolean executeBatch(Collection<E> list, int batchSize, BiConsumer<SqlSession, E> consumer) {
         return SqlHelper.executeBatch(this.entityClass, this.log, list, batchSize, consumer);
@@ -220,7 +215,5 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
             }
         });
     }
-
-    // ^^^^^^ Copy From com.baomidou.mybatisplus.extension.service.impl.ServiceImpl end
 
 }

@@ -15,8 +15,6 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 所有的 Mapper接口 都需要继承当前接口 如果想自己定义其他的全局方法， 您的全局 BaseMapper 需要继承当前接口
- *
  * @author qinweizhao
  * @since 2022/4/29
  */
