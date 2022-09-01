@@ -20,7 +20,7 @@ import java.util.List;
  * @author qinweizhao
  * @since 2022/4/29
  */
-public interface QwzBaseMapper<T> extends BaseMapper<T> {
+public interface QwzMapper<T> extends BaseMapper<T> {
 
     /**
      * 查询分页信息

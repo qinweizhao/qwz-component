@@ -3,7 +3,6 @@ package com.qinweizhao.component.mybatis.service;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.qinweizhao.component.core.response.PageResult;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
@@ -11,14 +10,11 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * 以前继承 com.baomidou.mybatisplus.extension.service.IService 的实现类，现在继承当前类
- *
  * @author qinweizhao
  * @since 2022/4/29
  */
 public interface QwzService<T> {
 
-    // ======= Copy From com.baomidou.mybatisplus.extension.service.IService 开始 =======
 
     /**
      * 默认批次提交数量
@@ -28,7 +24,8 @@ public interface QwzService<T> {
     /**
      * 插入一条记录（选择字段，策略插入）
      *
-     * @param entity 实体对象
+     * @param entity entity
+     * @return boolean
      */
     default boolean save(T entity) {
         return SqlHelper.retBool(getBaseMapper().insert(entity));
@@ -38,6 +35,7 @@ public interface QwzService<T> {
      * 插入（批量）
      *
      * @param entityList 实体对象集合
+     * @return boolean
      */
     @Transactional(rollbackFor = Exception.class)
     default boolean saveBatch(Collection<T> entityList) {
@@ -49,6 +47,7 @@ public interface QwzService<T> {
      *
      * @param entityList 实体对象集合
      * @param batchSize  插入批次数量
+     * @return boolean
      */
     boolean saveBatch(Collection<T> entityList, int batchSize);
 
@@ -56,6 +55,7 @@ public interface QwzService<T> {
      * 批量修改插入
      *
      * @param entityList 实体对象集合
+     * @return boolean
      */
     @Transactional(rollbackFor = Exception.class)
     default boolean saveOrUpdateBatch(Collection<T> entityList) {
@@ -67,6 +67,7 @@ public interface QwzService<T> {
      *
      * @param entityList 实体对象集合
      * @param batchSize  每次的数量
+     * @return boolean
      */
     boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize);
 
@@ -74,6 +75,7 @@ public interface QwzService<T> {
      * 根据 ID 删除
      *
      * @param id 主键ID
+     * @return boolean
      */
     default boolean removeById(Serializable id) {
         return SqlHelper.retBool(getBaseMapper().deleteById(id));
@@ -85,7 +87,6 @@ public interface QwzService<T> {
      * @param id      主键(类型必须与实体类型字段保持一致)
      * @param useFill 是否启用填充(为true的情况,会将入参转换实体进行delete删除)
      * @return 删除结果
-     * @since 3.5.0
      */
     default boolean removeById(Serializable id, boolean useFill) {
         throw new UnsupportedOperationException("不支持的方法!");
@@ -188,6 +189,7 @@ public interface QwzService<T> {
      * 根据 ID 选择修改
      *
      * @param entity 实体对象
+     * @return boolean
      */
     default boolean updateById(T entity) {
         return SqlHelper.retBool(getBaseMapper().updateById(entity));
@@ -197,6 +199,7 @@ public interface QwzService<T> {
      * 根据ID 批量更新
      *
      * @param entityList 实体对象集合
+     * @return boolean
      */
     @Transactional(rollbackFor = Exception.class)
     default boolean updateBatchById(Collection<T> entityList) {
@@ -208,6 +211,7 @@ public interface QwzService<T> {
      *
      * @param entityList 实体对象集合
      * @param batchSize  更新批次数量
+     * @return boolean
      */
     boolean updateBatchById(Collection<T> entityList, int batchSize);
 

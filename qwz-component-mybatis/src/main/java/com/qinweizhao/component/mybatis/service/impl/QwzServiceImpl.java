@@ -5,8 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.*;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
-import com.qinweizhao.component.core.response.PageResult;
-import com.qinweizhao.component.mybatis.mapper.QwzBaseMapper;
+import com.qinweizhao.component.mybatis.mapper.QwzMapper;
 import com.qinweizhao.component.mybatis.service.QwzService;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.logging.Log;
@@ -27,10 +26,8 @@ import java.util.function.BiConsumer;
  * @since 2022/4/29
  */
 @SuppressWarnings("unchecked")
-public class QwzServiceImpl<M extends QwzBaseMapper<T>, T> implements QwzService<T> {
+public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> {
 
-    // ======= Copy From com.baomidou.mybatisplus.extension.service.impl.ServiceImpl 开始
-    // =======
 
     protected Log log = LogFactory.getLog(getClass());
 
