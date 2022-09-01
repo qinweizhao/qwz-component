@@ -24,6 +24,7 @@ import java.util.function.BiConsumer;
  * 以前继承 com.baomidou.mybatisplus.extension.service.impl.ServiceImpl 的实现类，现在继承本类
  *
  * @author qinweizhao
+ * @since 2022/4/29
  */
 @SuppressWarnings("unchecked")
 public class QwzServiceImpl<M extends QwzBaseMapper<T>, T> implements QwzService<T> {

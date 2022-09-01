@@ -14,6 +14,7 @@ import java.util.List;
  * 以前继承 com.baomidou.mybatisplus.extension.service.IService 的实现类，现在继承当前类
  *
  * @author qinweizhao
+ * @since 2022/4/29
  */
 public interface QwzService<T> {
 

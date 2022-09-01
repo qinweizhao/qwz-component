@@ -14,6 +14,7 @@ import java.util.Collection;
  *
  * @param <T> 数据类型
  * @author qinweizhao
+ * @since 2022/4/29
  */
 public class QwzQueryWrapper<T> extends QueryWrapper<T> {
 

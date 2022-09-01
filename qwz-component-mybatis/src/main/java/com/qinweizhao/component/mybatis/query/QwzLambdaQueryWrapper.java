@@ -22,6 +22,7 @@ import java.util.function.Predicate;
  * 增加了一些简单条件的 IfPresent 条件 支持，Collection String Object 等等判断是否为空，或者是否为null
  *
  * @author qinweizhao
+ * @since 2022/4/29
  */
 public class QwzLambdaQueryWrapper<T> extends AbstractLambdaWrapper<T, QwzLambdaQueryWrapper<T>>
 		implements Query<QwzLambdaQueryWrapper<T>, T, SFunction<T, ?>> {
