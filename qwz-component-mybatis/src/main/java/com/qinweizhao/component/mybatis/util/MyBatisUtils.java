@@ -1,7 +1,6 @@
 package com.qinweizhao.component.mybatis.util;
 
 import cn.hutool.core.collection.CollectionUtil;
-
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
@@ -12,12 +11,12 @@ import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * MyBatis 工具类
+ *
  * @author qinweizhao
  * @since 2022/4/29
  */
@@ -33,7 +32,7 @@ public class MyBatisUtils {
         List<PageParam.Sort> sorts = pageParam.getSorts();
         if (!CollectionUtil.isEmpty(sorts)) {
             page.addOrder(sorts.stream().map(sortingField -> sortingField.isAsc() ?
-                    OrderItem.asc(sortingField.getField()) : OrderItem.desc(sortingField.getField()))
+                            OrderItem.asc(sortingField.getField()) : OrderItem.desc(sortingField.getField()))
                     .collect(Collectors.toList()));
         }
         return page;
@@ -44,8 +43,8 @@ public class MyBatisUtils {
      * 由于 MybatisPlusInterceptor 不支持添加拦截器，所以只能全量设置
      *
      * @param interceptor 链
-     * @param inner 拦截器
-     * @param index 位置
+     * @param inner       拦截器
+     * @param index       位置
      */
     public static void addInterceptor(MybatisPlusInterceptor interceptor, InnerInterceptor inner, int index) {
         List<InnerInterceptor> inners = new ArrayList<>(interceptor.getInterceptors());
@@ -55,7 +54,7 @@ public class MyBatisUtils {
 
     /**
      * 获得 Table 对应的表名
-     *
+     * <p>
      * 兼容 MySQL 转义表名 `t_xxx`
      *
      * @param table 表
@@ -72,9 +71,9 @@ public class MyBatisUtils {
     /**
      * 构建 Column 对象
      *
-     * @param tableName 表名
+     * @param tableName  表名
      * @param tableAlias 别名
-     * @param column 字段名
+     * @param column     字段名
      * @return Column 对象
      */
     public static Column buildColumn(String tableName, Alias tableAlias, String column) {
