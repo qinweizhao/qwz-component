@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author qinweizhao
@@ -97,7 +96,6 @@ public interface QwzService<T> {
      *
      * @param entity 实体
      * @return 删除结果
-     * @since 3.4.4
      */
     default boolean removeById(T entity) {
         return SqlHelper.retBool(getBaseMapper().deleteById(entity));
@@ -122,7 +120,6 @@ public interface QwzService<T> {
      * @param list    主键ID或实体列表
      * @param useFill 是否填充(为true的情况,会将入参转换实体进行delete删除)
      * @return 删除结果
-     * @since 3.5.0
      */
     @Transactional(rollbackFor = Exception.class)
     default boolean removeByIds(Collection<?> list, boolean useFill) {
@@ -140,7 +137,6 @@ public interface QwzService<T> {
      *
      * @param list 主键ID或实体列表(主键ID类型必须与实体类型字段保持一致)
      * @return 删除结果
-     * @since 3.5.0
      */
     @Transactional(rollbackFor = Exception.class)
     default boolean removeBatchByIds(Collection<?> list) {
@@ -153,7 +149,6 @@ public interface QwzService<T> {
      * @param list    主键ID或实体列表(主键ID类型必须与实体类型字段保持一致)
      * @param useFill 是否启用填充(为true的情况,会将入参转换实体进行delete删除)
      * @return 删除结果
-     * @since 3.5.0
      */
     @Transactional(rollbackFor = Exception.class)
     default boolean removeBatchByIds(Collection<?> list, boolean useFill) {
@@ -166,7 +161,6 @@ public interface QwzService<T> {
      * @param list      主键ID或实体列表
      * @param batchSize 批次大小
      * @return 删除结果
-     * @since 3.5.0
      */
     default boolean removeBatchByIds(Collection<?> list, int batchSize) {
         throw new UnsupportedOperationException("不支持的方法!");
@@ -179,7 +173,6 @@ public interface QwzService<T> {
      * @param batchSize 批次大小
      * @param useFill   是否启用填充(为true的情况,会将入参转换实体进行delete删除)
      * @return 删除结果
-     * @since 3.5.0
      */
     default boolean removeBatchByIds(Collection<?> list, int batchSize, boolean useFill) {
         throw new UnsupportedOperationException("不支持的方法!");
@@ -219,33 +212,9 @@ public interface QwzService<T> {
      * TableId 注解存在更新记录，否插入一条记录
      *
      * @param entity 实体对象
+     * @return boolean
      */
     boolean saveOrUpdate(T entity);
-
-    /**
-     * 根据 ID 查询
-     *
-     * @param id 主键ID
-     */
-    default T getById(Serializable id) {
-        return getBaseMapper().selectById(id);
-    }
-
-    /**
-     * 查询（根据ID 批量查询）
-     *
-     * @param idList 主键ID列表
-     */
-    default List<T> listByIds(Collection<? extends Serializable> idList) {
-        return getBaseMapper().selectBatchIds(idList);
-    }
-
-    /**
-     * 查询所有
-     */
-    default List<T> list() {
-        return getBaseMapper().selectList(null);
-    }
 
     /**
      * 获取对应 entity 的 BaseMapper
@@ -260,7 +229,4 @@ public interface QwzService<T> {
      * @return {@link Class<T>}
      */
     Class<T> getEntityClass();
-
-    // ^^^^^^ Copy From com.baomidou.mybatisplus.extension.service.IService end ^^^^^^
-
 }
