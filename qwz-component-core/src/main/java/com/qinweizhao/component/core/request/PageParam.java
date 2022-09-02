@@ -1,6 +1,7 @@
 package com.qinweizhao.component.core.request;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,9 @@ import java.util.List;
  * 分页查询参数
  *
  * @author qinweizhao
+ * @since 2022/4/12
  */
-public abstract class PageParam {
+public abstract class PageParam implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

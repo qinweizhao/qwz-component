@@ -8,11 +8,11 @@ import java.io.Serializable;
  *
  * @param <T> 　T对象
  * @author qinweizhao
+ * @since 2022/4/12
  */
-public class R<T> implements Serializable {
+public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
 
     private String code;
 
@@ -23,19 +23,10 @@ public class R<T> implements Serializable {
     /**
      * 私有化构造函数
      */
-    private R() {
+    private Result() {
 
     }
 
-    /**
-     * 成功-快速响应
-     *
-     * @param <T> T
-     * @return R
-     */
-    public static <T> R<T> success() {
-        return restResult(SystemResultCodeEnum.SUCCESS.getCode(), null, SystemResultCodeEnum.SUCCESS.getMessage());
-    }
 
     /**
      * 成功-携带数据的响应
@@ -44,8 +35,8 @@ public class R<T> implements Serializable {
      * @param <T>  T
      * @return R
      */
-    public static <T> R<T> success(T data) {
-        return restResult(SystemResultCodeEnum.SUCCESS.getCode(), data, SystemResultCodeEnum.SUCCESS.getMessage());
+    public static <T> Result<T> success(T data) {
+        return restResult(ResultCodeEnum.SUCCESS.getCode(), data, ResultCodeEnum.SUCCESS.getMessage());
     }
 
     /**
@@ -56,30 +47,8 @@ public class R<T> implements Serializable {
      * @param <T>     T
      * @return R
      */
-    public static <T> R<T> success(T data, String message) {
-        return restResult(SystemResultCodeEnum.SUCCESS.getCode(), data, message);
-    }
-
-    /**
-     * 失败-快速响应
-     *
-     * @param <T> T
-     * @return R
-     */
-    public static <T> R<T> failure() {
-        return restResult(SystemResultCodeEnum.SERVER_ERROR.getCode(), null, SystemResultCodeEnum.SERVER_ERROR.getMessage());
-    }
-
-
-    /**
-     * 失败-携带错误消息的响应
-     *
-     * @param message message
-     * @param <T>     T
-     * @return R
-     */
-    public static <T> R<T> failure(String message) {
-        return restResult(SystemResultCodeEnum.SERVER_ERROR.getCode(), null, message);
+    public static <T> Result<T> success(T data, String message) {
+        return restResult(ResultCodeEnum.SUCCESS.getCode(), data, message);
     }
 
     /**
@@ -90,7 +59,7 @@ public class R<T> implements Serializable {
      * @param <T>     T
      * @return R
      */
-    public static <T> R<T> failure(String code, String message) {
+    public static <T> Result<T> failure(String code, String message) {
         return restResult(code, null, message);
     }
 
@@ -101,9 +70,9 @@ public class R<T> implements Serializable {
      * @param <T>        T
      * @return R
      */
-    public static <T> R<T> failure(ResultCode resultCode) {
+    public static <T> Result<T> failure(ResultCode resultCode) {
         if (resultCode == null) {
-            return new R<>();
+            return new Result<>();
         }
         return restResult(resultCode.getCode(), null, resultCode.getMessage());
     }
@@ -117,12 +86,12 @@ public class R<T> implements Serializable {
      * @param <T>     T
      * @return R
      */
-    private static <T> R<T> restResult(String code, T data, String message) {
-        R<T> r = new R<>();
-        r.setCode(code);
-        r.setData(data);
-        r.setMessage(message);
-        return r;
+    private static <T> Result<T> restResult(String code, T data, String message) {
+        Result<T> result = new Result<>();
+        result.setCode(code);
+        result.setData(data);
+        result.setMessage(message);
+        return result;
     }
 
 

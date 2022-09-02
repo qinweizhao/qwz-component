@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
  * 实体类基类
  *
  * @author qinweizhao
+ * @since 2022/7/6
  */
 public abstract class BaseEntity implements Serializable {
 

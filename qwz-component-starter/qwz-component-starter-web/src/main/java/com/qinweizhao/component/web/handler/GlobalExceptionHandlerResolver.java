@@ -2,8 +2,8 @@ package com.qinweizhao.component.web.handler;
 
 import com.qinweizhao.component.core.exception.BaseException;
 import com.qinweizhao.component.core.exception.BizException;
-import com.qinweizhao.component.core.response.R;
-import com.qinweizhao.component.core.response.SystemResultCodeEnum;
+import com.qinweizhao.component.core.response.Result;
+import com.qinweizhao.component.core.response.ResultCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.ConversionNotSupportedException;
@@ -81,7 +81,7 @@ public class GlobalExceptionHandlerResolver {
             AsyncRequestTimeoutException.class,
             ValidationException.class
     })
-    public R<?> handleServletException(Exception e) {
+    public Result<?> handleServletException(Exception e) {
         String errorMessage;
         if (e instanceof BindException) {
             BindingResult bindingResult = ((BindException) e).getBindingResult();
@@ -90,10 +90,10 @@ public class GlobalExceptionHandlerResolver {
             log.error("请求异常-参数绑定异常,ex = {}", errorMessage);
         } else {
             log.error("请求异常 ex={}", e.getMessage());
-            errorMessage = ENV_PROD.equals(profile) ? SystemResultCodeEnum.BAD_REQUEST.getMessage() : e.getMessage();
+            errorMessage = ENV_PROD.equals(profile) ? ResultCodeEnum.SERVER_ERROR.getMessage() : e.getMessage();
 
         }
-        return R.failure(SystemResultCodeEnum.BAD_REQUEST.getCode(), errorMessage);
+        return Result.failure(ResultCodeEnum.SERVER_ERROR.getCode(), errorMessage);
     }
 
     /**
@@ -103,9 +103,9 @@ public class GlobalExceptionHandlerResolver {
      * @return 异常结果
      */
     @ExceptionHandler(value = BizException.class)
-    public R<?> handleBusinessException(BizException e) {
+    public Result<?> handleBusinessException(BizException e) {
         log.error("业务异常信息 ex={}", e.getMessage());
-        return R.failure(e.getCode(), e.getMessage());
+        return Result.failure(e.getCode(), e.getMessage());
     }
 
 
@@ -116,9 +116,9 @@ public class GlobalExceptionHandlerResolver {
      * @return 异常结果
      */
     @ExceptionHandler(value = BaseException.class)
-    public R<?> handleBaseException(BaseException e) {
+    public Result<?> handleBaseException(BaseException e) {
         log.error("自定义异常信息 ex={}", e.getMessage());
-        return R.failure(e.getCode(), e.getMessage());
+        return Result.failure(e.getCode(), e.getMessage());
     }
 
 
@@ -129,10 +129,10 @@ public class GlobalExceptionHandlerResolver {
      * @return R
      */
     @ExceptionHandler(Exception.class)
-    public R<String> handleException(Exception e) {
+    public Result<String> handleException(Exception e) {
         log.error("全局异常信息 ex={}", e.getMessage(), e);
         // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.
-        String errorMessage = ENV_PROD.equals(profile) ? SystemResultCodeEnum.SERVER_ERROR.getMessage() : e.getLocalizedMessage();
-        return R.failure(SystemResultCodeEnum.SERVER_ERROR.getCode(), errorMessage);
+        String errorMessage = ENV_PROD.equals(profile) ? ResultCodeEnum.SERVER_ERROR.getMessage() : e.getLocalizedMessage();
+        return Result.failure(ResultCodeEnum.SERVER_ERROR.getCode(), errorMessage);
     }
 }
