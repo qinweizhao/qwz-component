@@ -45,18 +45,6 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
 
     protected Class<M> mapperClass = currentMapperClass();
 
-    /**
-     * 判断数据库操作是否成功
-     *
-     * @param result 数据库操作返回影响条数
-     * @return boolean
-     * @deprecated 3.3.1
-     */
-    @Deprecated
-    protected boolean retBool(Integer result) {
-        return SqlHelper.retBool(result);
-    }
-
     protected Class<M> currentMapperClass() {
         return (Class<M>) ReflectionKit.getSuperClassGenericType(this.getClass(), QwzServiceImpl.class, 0);
     }
