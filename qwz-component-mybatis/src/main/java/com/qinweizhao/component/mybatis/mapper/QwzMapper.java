@@ -3,22 +3,37 @@ package com.qinweizhao.component.mybatis.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.qinweizhao.component.core.request.PageParam;
 import com.qinweizhao.component.core.response.PageResult;
 import com.qinweizhao.component.mybatis.util.MyBatisUtils;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 
 import java.util.Collection;
 import java.util.List;
+
+import static com.baomidou.mybatisplus.core.enums.SqlMethod.INSERT_ONE;
 
 /**
  * @author qinweizhao
  * @since 2022/4/29
  */
 public interface QwzMapper<T> extends BaseMapper<T> {
+
+
+    Log log = LogFactory.getLog(QwzMapper.class);
+
+
+    /**
+     * 默认批次提交数量
+     */
+    int DEFAULT_BATCH_SIZE = 1000;
 
     /**
      * 查询分页信息
@@ -89,7 +104,7 @@ public interface QwzMapper<T> extends BaseMapper<T> {
      * @return Long
      */
     default Long selectCount() {
-        return selectCount(new QueryWrapper<T>());
+        return selectCount(new QueryWrapper<>());
     }
 
     /**
@@ -168,12 +183,36 @@ public interface QwzMapper<T> extends BaseMapper<T> {
     }
 
     /**
-     * 逐条插入，适合少量数据插入，或者对性能要求不高的场景
+     * 批量插入
      *
      * @param entities entities
+     * @return boolean
      */
-    default void insertBatch(Collection<T> entities) {
-        entities.forEach(this::insert);
+    default boolean insertBatch(Collection<T> entities) {
+        return this.insertBatch(entities,DEFAULT_BATCH_SIZE);
+    }
+
+    /**
+     * 插入（批量）
+     *
+     * @param entities  实体对象集合
+     * @param batchSize 插入批次数量
+     * @return boolean
+     */
+    default boolean insertBatch(Collection<T> entities, int batchSize) {
+        String sqlStatement = getSqlStatement(INSERT_ONE);
+        return SqlHelper.executeBatch(entities.getClass(), log, entities, batchSize, (sqlSession, entity) -> sqlSession.insert(sqlStatement, entity));
+
+    }
+
+    /**
+     * 获取mapperStatementId
+     *
+     * @param sqlMethod 方法名
+     * @return 命名id
+     */
+    default String getSqlStatement(SqlMethod sqlMethod) {
+        return SqlHelper.getSqlStatement(this.getClass(), sqlMethod);
     }
 
 }
