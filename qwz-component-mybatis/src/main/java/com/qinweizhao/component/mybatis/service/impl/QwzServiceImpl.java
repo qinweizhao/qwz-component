@@ -54,20 +54,6 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
     }
 
     /**
-     * 批量插入
-     *
-     * @param entityList ignore
-     * @param batchSize  ignore
-     * @return ignore
-     */
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public boolean saveBatch(Collection<T> entityList, int batchSize) {
-        String sqlStatement = getSqlStatement(SqlMethod.INSERT_ONE);
-        return executeBatch(entityList, batchSize, (sqlSession, entity) -> sqlSession.insert(sqlStatement, entity));
-    }
-
-    /**
      * 获取mapperStatementId
      *
      * @param sqlMethod 方法名
@@ -75,46 +61,6 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
      */
     protected String getSqlStatement(SqlMethod sqlMethod) {
         return SqlHelper.getSqlStatement(mapperClass, sqlMethod);
-    }
-
-    /**
-     * TableId 注解存在更新记录，否插入一条记录
-     *
-     * @param entity 实体对象
-     * @return boolean
-     */
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public boolean saveOrUpdate(T entity) {
-        if (null != entity) {
-            TableInfo tableInfo = TableInfoHelper.getTableInfo(this.entityClass);
-            Assert.notNull(tableInfo, "error: can not execute. because can not find cache of TableInfo for entity!");
-            String keyProperty = tableInfo.getKeyProperty();
-            Assert.notEmpty(keyProperty, "error: can not execute. because can not find column for id from entity!");
-            Object idVal = tableInfo.getPropertyValue(entity, tableInfo.getKeyProperty());
-            return StringUtils.checkValNull(idVal) || Objects.isNull(baseMapper.selectById((Serializable) idVal)) ? save(entity)
-                    : updateById(entity);
-        }
-        return false;
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    @Override
-    public boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize) {
-        TableInfo tableInfo = TableInfoHelper.getTableInfo(entityClass);
-        Assert.notNull(tableInfo, "error: can not execute. because can not find cache of TableInfo for entity!");
-        String keyProperty = tableInfo.getKeyProperty();
-        Assert.notEmpty(keyProperty, "error: can not execute. because can not find column for id from entity!");
-        return SqlHelper.saveOrUpdateBatch(this.entityClass, this.mapperClass, this.log, entityList, batchSize,
-                (sqlSession, entity) -> {
-                    Object idVal = tableInfo.getPropertyValue(entity, keyProperty);
-                    return StringUtils.checkValNull(idVal) || CollectionUtils
-                            .isEmpty(sqlSession.selectList(getSqlStatement(SqlMethod.SELECT_BY_ID), entity));
-                }, (sqlSession, entity) -> {
-                    MapperMethod.ParamMap<T> param = new MapperMethod.ParamMap<>();
-                    param.put(Constants.ENTITY, entity);
-                    sqlSession.update(getSqlStatement(SqlMethod.UPDATE_BY_ID), param);
-                });
     }
 
     @Transactional(rollbackFor = Exception.class)

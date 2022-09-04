@@ -20,55 +20,6 @@ public interface QwzService<T> {
      */
     int DEFAULT_BATCH_SIZE = 1000;
 
-    /**
-     * 插入一条记录（选择字段，策略插入）
-     *
-     * @param entity entity
-     * @return boolean
-     */
-    default boolean save(T entity) {
-        return SqlHelper.retBool(getBaseMapper().insert(entity));
-    }
-
-    /**
-     * 插入（批量）
-     *
-     * @param entityList 实体对象集合
-     * @return boolean
-     */
-    @Transactional(rollbackFor = Exception.class)
-    default boolean saveBatch(Collection<T> entityList) {
-        return saveBatch(entityList, DEFAULT_BATCH_SIZE);
-    }
-
-    /**
-     * 插入（批量）
-     *
-     * @param entityList 实体对象集合
-     * @param batchSize  插入批次数量
-     * @return boolean
-     */
-    boolean saveBatch(Collection<T> entityList, int batchSize);
-
-    /**
-     * 批量修改插入
-     *
-     * @param entityList 实体对象集合
-     * @return boolean
-     */
-    @Transactional(rollbackFor = Exception.class)
-    default boolean saveOrUpdateBatch(Collection<T> entityList) {
-        return saveOrUpdateBatch(entityList, DEFAULT_BATCH_SIZE);
-    }
-
-    /**
-     * 批量修改插入
-     *
-     * @param entityList 实体对象集合
-     * @param batchSize  每次的数量
-     * @return boolean
-     */
-    boolean saveOrUpdateBatch(Collection<T> entityList, int batchSize);
 
     /**
      * 根据 ID 删除
@@ -207,14 +158,6 @@ public interface QwzService<T> {
      * @return boolean
      */
     boolean updateBatchById(Collection<T> entityList, int batchSize);
-
-    /**
-     * TableId 注解存在更新记录，否插入一条记录
-     *
-     * @param entity 实体对象
-     * @return boolean
-     */
-    boolean saveOrUpdate(T entity);
 
     /**
      * 获取对应 entity 的 BaseMapper
