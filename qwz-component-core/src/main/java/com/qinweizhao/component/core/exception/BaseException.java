@@ -15,25 +15,25 @@ public abstract class BaseException extends RuntimeException {
 
     private final String code;
 
-    public BaseException(String message, String code) {
+    protected BaseException(String message, String code) {
         super(message);
         this.message = message;
         this.code = code;
     }
 
-    public BaseException(String message, String code, Throwable e) {
-        super(message,e);
+    protected BaseException(String message, String code, Throwable e) {
+        super(message, e);
         this.message = message;
         this.code = code;
     }
 
-    public <T extends ResultCode> BaseException(T resultCode) {
+    protected <T extends ResultCode> BaseException(T resultCode) {
         super(resultCode.getMessage());
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
     }
 
-    public  <T extends ResultCode> BaseException(T resultCode, Throwable e) {
+    protected <T extends ResultCode> BaseException(T resultCode, Throwable e) {
         super(resultCode.getMessage(), e);
         this.code = resultCode.getCode();
         this.message = resultCode.getMessage();
@@ -47,4 +47,10 @@ public abstract class BaseException extends RuntimeException {
     public String getCode() {
         return code;
     }
+
+    public String getResultCode() {
+        return code;
+    }
+
+
 }

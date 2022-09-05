@@ -47,7 +47,7 @@ public class GlobalExceptionHandlerResolver {
     /**
      * 生产环境
      */
-    private final static String ENV_PROD = "prod";
+    private static final String ENV_PROD = "prod";
 
 
     /**
@@ -90,10 +90,10 @@ public class GlobalExceptionHandlerResolver {
             log.error("请求异常-参数绑定异常,ex = {}", errorMessage);
         } else {
             log.error("请求异常 ex={}", e.getMessage());
-            errorMessage = ENV_PROD.equals(profile) ? ResultCodeEnum.SERVER_ERROR.getMessage() : e.getMessage();
+            errorMessage = ENV_PROD.equals(profile) ? ResultCodeEnum.FAILURE.getMessage() : e.getMessage();
 
         }
-        return Result.failure(ResultCodeEnum.SERVER_ERROR.getCode(), errorMessage);
+        return Result.failure(ResultCodeEnum.FAILURE.getCode(), errorMessage);
     }
 
     /**
@@ -132,7 +132,7 @@ public class GlobalExceptionHandlerResolver {
     public Result<String> handleException(Exception e) {
         log.error("全局异常信息 ex={}", e.getMessage(), e);
         // 当为生产环境, 不适合把具体的异常信息展示给用户, 比如数据库异常信息.
-        String errorMessage = ENV_PROD.equals(profile) ? ResultCodeEnum.SERVER_ERROR.getMessage() : e.getLocalizedMessage();
-        return Result.failure(ResultCodeEnum.SERVER_ERROR.getCode(), errorMessage);
+        String errorMessage = ENV_PROD.equals(profile) ? ResultCodeEnum.FAILURE.getMessage() : e.getLocalizedMessage();
+        return Result.failure(ResultCodeEnum.FAILURE.getCode(), errorMessage);
     }
 }

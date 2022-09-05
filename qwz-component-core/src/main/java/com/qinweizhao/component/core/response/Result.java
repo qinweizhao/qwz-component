@@ -27,6 +27,15 @@ public class Result<T> implements Serializable {
 
     }
 
+    /**
+     * 成功-快速响应
+     *
+     * @param <T> T
+     * @return R
+     */
+    public static <T> Result<T> success() {
+        return restResult(ResultCodeEnum.SUCCESS.getCode(), null, ResultCodeEnum.SUCCESS.getMessage());
+    }
 
     /**
      * 成功-携带数据的响应
@@ -52,6 +61,16 @@ public class Result<T> implements Serializable {
     }
 
     /**
+     * 失败-快速响应
+     *
+     * @param <T> T
+     * @return R
+     */
+    public static <T> Result<T> failure() {
+        return restResult(ResultCodeEnum.FAILURE.getCode(), null, ResultCodeEnum.FAILURE.getMessage());
+    }
+
+    /**
      * 失败-携带错误码和错误消息的响应
      *
      * @param code    code
@@ -72,7 +91,7 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> failure(ResultCode resultCode) {
         if (resultCode == null) {
-            return new Result<>();
+            return failure();
         }
         return restResult(resultCode.getCode(), null, resultCode.getMessage());
     }
@@ -94,6 +113,17 @@ public class Result<T> implements Serializable {
         return result;
     }
 
+
+    /**
+     * 判断结果
+     *
+     * @param status status
+     * @param <T>    T
+     * @return T
+     */
+    public static <T> Result<T> judge(boolean status) {
+        return status ? success() : failure();
+    }
 
     /**
      * getter setter

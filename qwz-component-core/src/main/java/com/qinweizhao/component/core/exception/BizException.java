@@ -18,4 +18,12 @@ public class BizException extends BaseException {
         super(resultCode, e);
     }
 
+    public BizException(ResultCode resultCode, String message) {
+        super(resultCode.getCode(), message);
+    }
+
+    public BizException(ResultCode resultCode, String message, Throwable e) {
+        super(resultCode.getCode(), message, e);
+    }
+
 }
