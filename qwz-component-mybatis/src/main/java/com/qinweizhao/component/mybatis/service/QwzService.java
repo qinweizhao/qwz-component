@@ -48,9 +48,7 @@ public interface QwzService<T> {
      * @param batchSize 批次大小
      * @return 删除结果
      */
-    default boolean removeBatchByIds(Collection<?> list, int batchSize) {
-        throw new UnsupportedOperationException("不支持的方法!");
-    }
+    boolean removeBatchByIds(Collection<?> list, int batchSize);
 
     /**
      * 根据 ID 更新
