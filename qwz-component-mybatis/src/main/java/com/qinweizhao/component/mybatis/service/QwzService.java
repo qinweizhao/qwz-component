@@ -24,7 +24,7 @@ public interface QwzService<T> {
      *
      * @param entity 实体对象
      */
-    default boolean insert(T entity) {
+    default boolean save(T entity) {
         return SqlHelper.retBool(getBaseMapper().insert(entity));
     }
 
@@ -34,8 +34,8 @@ public interface QwzService<T> {
      * @param entityList 实体对象集合
      */
     @Transactional(rollbackFor = Exception.class)
-    default boolean insertBatch(Collection<T> entityList) {
-        return insertBatch(entityList, DEFAULT_BATCH_SIZE);
+    default boolean saveBatch(Collection<T> entityList) {
+        return saveBatch(entityList, DEFAULT_BATCH_SIZE);
     }
 
     /**
@@ -44,7 +44,7 @@ public interface QwzService<T> {
      * @param entityList 实体对象集合
      * @param batchSize  插入批次数量
      */
-    boolean insertBatch(Collection<T> entityList, int batchSize);
+    boolean saveBatch(Collection<T> entityList, int batchSize);
 
     /**
      * 根据 ID 删除

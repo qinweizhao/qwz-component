@@ -62,7 +62,7 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean insertBatch(Collection<T> entityList, int batchSize) {
+    public boolean saveBatch(Collection<T> entityList, int batchSize) {
         String sqlStatement = getSqlStatement(SqlMethod.INSERT_ONE);
         return executeBatch(entityList, batchSize, (sqlSession, entity) -> sqlSession.insert(sqlStatement, entity));
     }
