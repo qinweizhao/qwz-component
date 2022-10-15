@@ -60,8 +60,22 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
         return SqlHelper.getSqlStatement(mapperClass, sqlMethod);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean insertBatch(Collection<T> entityList, int batchSize) {
+        String sqlStatement = getSqlStatement(SqlMethod.INSERT_ONE);
+        return executeBatch(entityList, batchSize, (sqlSession, entity) -> sqlSession.insert(sqlStatement, entity));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public boolean removeBatchByIds(Collection<?> list, int batchSize) {
+        String sqlStatement = getSqlStatement(SqlMethod.DELETE_BY_ID);
+        return executeBatch(list, batchSize, (sqlSession, e) -> sqlSession.update(sqlStatement, e));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean updateBatchById(Collection<T> entityList, int batchSize) {
         String sqlStatement = getSqlStatement(SqlMethod.UPDATE_BY_ID);
         return executeBatch(entityList, batchSize, (sqlSession, entity) -> {
@@ -71,12 +85,6 @@ public class QwzServiceImpl<M extends QwzMapper<T>, T> implements QwzService<T> 
         });
     }
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean removeBatchByIds(Collection<?> list, int batchSize) {
-        String sqlStatement = getSqlStatement(SqlMethod.DELETE_BY_ID);
-        return executeBatch(list, batchSize, (sqlSession, e) -> sqlSession.update(sqlStatement, e));
-    }
 
     /**
      * 执行批量操作

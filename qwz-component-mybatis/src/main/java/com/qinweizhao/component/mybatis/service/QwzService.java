@@ -19,6 +19,32 @@ public interface QwzService<T> {
      */
     int DEFAULT_BATCH_SIZE = 1000;
 
+    /**
+     * 新增
+     *
+     * @param entity 实体对象
+     */
+    default boolean insert(T entity) {
+        return SqlHelper.retBool(getBaseMapper().insert(entity));
+    }
+
+    /**
+     * 新增（批量），该方法不支持 Oracle、SQL Server
+     *
+     * @param entityList 实体对象集合
+     */
+    @Transactional(rollbackFor = Exception.class)
+    default boolean insertBatch(Collection<T> entityList) {
+        return insertBatch(entityList, DEFAULT_BATCH_SIZE);
+    }
+
+    /**
+     * 新增（批量），该方法不支持 Oracle、SQL Server
+     *
+     * @param entityList 实体对象集合
+     * @param batchSize  插入批次数量
+     */
+    boolean insertBatch(Collection<T> entityList, int batchSize);
 
     /**
      * 根据 ID 删除
